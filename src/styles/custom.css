@@ -26,7 +26,8 @@ html { scroll-padding-top: 6rem; }
 :root[data-has-hero] .hero { padding-block: 4rem 2.5rem; gap: 2.5rem; }
 :root[data-has-hero] .hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.05; letter-spacing: -0.055em; }
 :root[data-has-hero] .hero .tagline { font-size: 1.3rem; line-height: 1.75; max-width: 36rem; }
-:root[data-has-hero] .hero img { width: 100%; height: auto; padding: 1.5rem; border-radius: 1.75rem; background: #f5f4f0; }
+:root[data-has-hero] .hero img { width: 100%; height: auto; }
+:root[data-theme='dark'][data-has-hero] .hero img { filter: drop-shadow(0 0 1px rgb(255 255 255 / 0.7)) drop-shadow(0 0 12px rgb(255 255 255 / 0.12)); }
 .course-home { color: var(--sl-color-text); }
 .course-summary { display: flex; flex-wrap: wrap; gap: 1.2rem 2.5rem; padding: 1.4rem 0; border-block: 1px solid var(--sl-color-hairline); font-size: 1.05rem; }
 .course-summary strong { color: var(--sl-color-white); font-size: 1.4rem; margin-right: 0.3rem; }
@@ -59,7 +60,7 @@ html { scroll-padding-top: 6rem; }
 }
 @media (max-width: 40rem) {
   :root[data-has-hero] .hero { padding-top: 2.5rem; }
-  :root[data-has-hero] .hero img { max-width: 22rem; margin-inline: auto; }
+  :root[data-has-hero] .hero img { max-width: 26rem; margin-inline: auto; }
   .course-summary { gap: 0.7rem 1.5rem; }
   .course-summary span:last-child { flex-basis: 100%; }
   .section-intro { margin-top: 3rem; }

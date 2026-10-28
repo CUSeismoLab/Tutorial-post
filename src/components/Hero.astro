@@ -18,11 +18,11 @@ const source = image && 'file' in image ? image.file : undefined;
       ))}
     </div>
   </div>
-  {source && <Image src={source} width={640} alt={image?.alt || ''} loading="eager" fetchpriority="high" />}
+  {source && <Image src={source} width={780} alt={image?.alt || ''} loading="eager" fetchpriority="high" />}
 </div>
 
 <style>
-  .hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; }
+  .hero { display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; }
   .hero-copy { display: flex; flex-direction: column; gap: 1.5rem; }
   .hero-label { color: var(--sl-color-accent-high); font-size: 0.8rem; letter-spacing: 0.16em; font-weight: 700; }
   h1 { color: var(--sl-color-white); font-weight: 650; }
@@ -30,6 +30,6 @@ const source = image && 'file' in image ? image.file : undefined;
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }
   @media (max-width: 50rem) {
     .hero { grid-template-columns: 1fr; }
-    .hero > img { max-width: 30rem; margin-inline: auto; }
+    .hero > img { max-width: 34rem; margin-inline: auto; }
   }
 </style>
