@@ -15,11 +15,15 @@ Stress drop is an important earthquake source parameter, which is proportional t
 
 For a circular fault in a whole space, Eshelby(1957) obtained the relation between the average stress drop and the seismic moment:
 
-<img src="/media/source_spectra/circular_fault.png" alt="circular fault" style={{width: "70.0%"}} loading="lazy" />
+$$
+\Delta\sigma = \frac{7\pi\mu\bar{D}}{16r} = \frac{7M_0}{16r^3}
+$$
+
+where $M_0$ is the seismic moment, $r$ is the rupture radius, $\bar{D}$ is the average slip, $\mu$ is the shear modulus, and $\Delta\sigma$ is the stress drop.
 
 ### What is earthquake spectrum?
 
-We can calculate the spectrum for earthquakes from the seismograms after removing the effects from the path. The amplitude in the low frequency limit is determined by earthquake moment (M0). The spectrum starts to decay around corner frequency (fc), and keep a nearly constant decay rate in log-log domain in the high frequency.
+We can calculate the spectrum for earthquakes from the seismograms after removing the effects from the path. The amplitude in the low frequency limit is determined by earthquake moment ($M_0$). The spectrum starts to decay around corner frequency ($f_c$), and keep a nearly constant decay rate in log-log domain in the high frequency.
 
 <img src="/media/source_spectra/spectra_case.png" alt="spectra case" style={{width: "60.0%"}} loading="lazy" />
 
@@ -29,7 +33,14 @@ Figure 1: (Figure 9.13 in Introduction to Seismology) The relationships between 
 
 Linking the spectra with the source parameters requires assumptions on the source. Brune (1970) assume a built up the relationship between the source spectra and the source parameters including the stress drop. He assumed that the stress pulse is tangential and rupture velocity is infinite on a circular rupture surface, then derived the near-filed displacement under the constraint of edge-effect. The slip and slip rate on the fault evolve with time.
 
-<img src="/media/source_spectra/brunesource1.png" alt="brunesource1" style={{width: "70.0%"}} loading="lazy" />
+$$
+\begin{aligned}
+u(x=0,t) &= (\sigma/\mu)\,\beta\tau\left(1 - e^{-t/\tau}\right) \\
+\dot{u}(x=0,t) &= (\sigma/\mu)\,\beta e^{-t/\tau}
+\end{aligned}
+$$
+
+where $\sigma$ is the effective stress, $\tau = r/\beta$, $\beta$ is the shear wave velocity, $r$ is the radius of the circular rupture surface, and $\mu$ is the rigidity.
 
 The functions of slip and slip rate on faults in Brune's model
 
@@ -39,7 +50,19 @@ Figure 2: the shape of slip and slip rate function in Brune's model.
 
 The conservation of energy density at high frequency and long-period limit(static field ) were applied to constrain the displacement in Brune's model. Brune's model has been widely used in spectral analysis in the following format to link the spectra with the seismic moment and stress drop:
 
-<img src="/media/source_spectra/equation_final.png" alt="equation final" style={{width: "80.0%"}} loading="lazy" />
+$$
+\Omega(\omega) = \frac{\Omega_0}{1 + (f/f_c)^2} \tag{1}
+$$
+
+$$
+\Omega_0 = \Re_{\theta\phi} M_0 \left(4\pi\rho R\beta^3\right)^{-1} \tag{2}
+$$
+
+$$
+\Delta\sigma = M_0 \left(\frac{f_c}{0.42\beta}\right)^3 \tag{3}
+$$
+
+where $f_c$ is the corner frequency, $\Re_{\theta\phi}$ is the radiation pattern, $r$ is the radius of the rupture, $R$ is the ray path length, and $\beta$ is the P wave speed.
 
 ### Path and free surface effects
 
@@ -141,7 +164,7 @@ The depth phase will largely affect the waveform shape at low frequency. It is o
 
 ### Estimating the moment and stress drop
 
-The average magnitude of spectra in the low frequency limit is ~ 4\*10^19 Nm. The moment magnitude is 1.1\*10^20 Nm. The moment magnitude is 7.3. The corner frequency is ~0.1 Hz. Assuming a P wave speed of 3900 km/s and a density of 3000kg/m^3, the stress drop is estimated to be 25 MPa, residing in the normal range for continental earthquakes.
+The average magnitude of spectra in the low frequency limit is $\sim 4\times10^{19}$ N·m. The moment magnitude is $1.1\times10^{20}$ N·m. The moment magnitude is 7.3. The corner frequency is ~0.1 Hz. Assuming a P wave speed of 3900 m/s and a density of 3000 kg/m$^3$, the stress drop is estimated to be 25 MPa, residing in the normal range for continental earthquakes.
 
 <Aside type="note">
 

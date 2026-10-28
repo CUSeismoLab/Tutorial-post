@@ -5,15 +5,19 @@ slug: gcap
 
 import { Aside } from '@astrojs/starlight/components';
 
-Waveforms recorded at a seismic station, W(t), compose of three components:
+Waveforms recorded at a seismic station, $W(t)$, compose of three components:
 
-W(t) = S(t) \* G(t) \* I(t); (1)
+$$
+W(t) = S(t) * G(t) * I(t) \tag{1}
+$$
 
-where S(t) represents the source, G(t) stands for the Green's functions, and I(t) is the instrument response. Therefore, retrieving source parameters of one earthquake S(t) requires deconvolving instrument response I(t) and Green's functions G(t) from the actual data W(t). We generally remove instrument responses after obtaining the waveform data. Therefore, we have the data in displacement or in velocity, u(t) = S(t) \* G(t). The corresponding synthetic displacement s(t) for a douple-couple source can be expressed as
+where $S(t)$ represents the source, $G(t)$ stands for the Green's functions, and $I(t)$ is the instrument response. Therefore, retrieving source parameters of one earthquake $S(t)$ requires deconvolving instrument response $I(t)$ and Green's functions $G(t)$ from the actual data $W(t)$. We generally remove instrument responses after obtaining the waveform data. Therefore, we have the data in displacement or in velocity, $u(t) = S(t) * G(t)$. The corresponding synthetic displacement $s(t)$ for a double-couple source can be expressed as
 
-s(t) = M0 ∑ Ai(ϕ -θ,β,λ)Gi(t); (2)
+$$
+s(t) = M_0 \sum_i A_i(\phi - \theta, \beta, \lambda)\, G_i(t) \tag{2}
+$$
 
-where Gi are the Green's functions, Ai are the radiation coeffcients, and ϕ is the station azimuth, M0 is scalar moment,θ,β, and λ are strike, dip, and rake, respectively. Then we perform a grid search in all possible solutions of strike, dip, and rake to obtain the best fit by finding the minimal residual between the data and synthetics. This procedure consists of the following three steps, (1) computing Green's functions, (2) preparing data seismograms, and (3) deriving focal mechanism solutions. This tutorial will mostly cover step (3).
+where $G_i$ are the Green's functions, $A_i$ are the radiation coefficients, $\phi$ is the station azimuth, $M_0$ is the scalar moment, and $\theta$, $\beta$, and $\lambda$ are strike, dip, and rake, respectively. Then we perform a grid search in all possible solutions of strike, dip, and rake to obtain the best fit by finding the minimal residual between the data and synthetics. This procedure consists of the following three steps, (1) computing Green's functions, (2) preparing data seismograms, and (3) deriving focal mechanism solutions. This tutorial will mostly cover step (3).
 
 Here we compute focal mechanism solutions using the Cut and Paste" method (CAP) \[Zhu and Helmberger, 1996\]. This method decomposes seismograms and uses amplitude information in different time windows (e.g., Pnl/surface wave) to increase the stability and resolution of focal mechanism solution. Please refer to \[Zhu and Helmberger, 1996\] for details of the CAP method. The earthquake example used in the gCAP program is the 2008 Illinois Mw 5.2 earthquake. It is a left-lateral strike-slip event based on focal mechanism solutions and aftershock locations \[Yang et al., 2009\].
 
@@ -25,7 +29,7 @@ Developed by Han CHEN.
 
 ### 1.1 What is focal mechanism
 
-To describe the geometry of a fault, Scientists assume that the fault is a planar surface across which slip occurred during an earthquake. The focal mechanism describes the fault geometry of the seismogenic fault (e.g., strike(θ), dip(β)) and the slip in the fault (e.g., rake(λ)). The beach ball were the lower-hemisphere stereographic projection of the fault geometry.
+To describe the geometry of a fault, Scientists assume that the fault is a planar surface across which slip occurred during an earthquake. The focal mechanism describes the fault geometry of the seismogenic fault (e.g., strike ($\theta$), dip ($\beta$)) and the slip in the fault (e.g., rake ($\lambda$)). The beach ball were the lower-hemisphere stereographic projection of the fault geometry.
 
 <img src="/media/gcap/gcap/focal-mechanism.png" alt="focal mechanism" style={{width: "50.0%"}} loading="lazy" />
 
@@ -277,7 +281,7 @@ The steps of focal mechanism inversion using gCAP3D
 7. Remember to remove the waveform data from the folder whose P arrival is too dim to be seen.
 
 
-8. Resample the data to Δ𝑡 that the same as the Green's function
+8. Resample the data to the same sampling interval $\Delta t$ as the Green's function
 
 
 9. Set up the “info.eve” file under each event folder. It is a five-column file, of which the format is: “o-marker evla evlo evdp mag”.
