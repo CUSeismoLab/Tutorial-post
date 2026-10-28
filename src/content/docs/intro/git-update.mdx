@@ -7,17 +7,23 @@ import { Steps } from '@astrojs/starlight/components';
 
 CUSeismoLab Tutorial is built with [Astro](https://astro.build/) and [Starlight](https://starlight.astro.build/). Every tutorial is a plain MDX file in the [CUSeismoLab/Tutorial-post](https://github.com/CUSeismoLab/Tutorial-post) repository, so fixing a typo, improving an explanation, or adding a new chapter only takes a text editor and Git. Changes merged into the `main` branch are built and published to the website automatically by GitHub Actions.
 
+:::caution[Fork first, then open a pull request]
+Please don't push to the `CUSeismoLab/Tutorial-post` repository directly. Every contribution, however small, should be made in your own fork and submitted as a pull request, so that it can be reviewed before it goes live.
+:::
+
 ## Quick edits on GitHub
 
 For a small fix to a single page, you don't need to set anything up locally:
 
 <Steps>
 
-1. Open the page's file in the repository, e.g. `src/content/docs/unix/index.mdx`.
+1. Fork the repository: open [CUSeismoLab/Tutorial-post](https://github.com/CUSeismoLab/Tutorial-post) and click **Fork** in the top-right corner.
 
-2. Click the pencil icon (**Edit this file**). If you don't have write access, GitHub will create a fork for you.
+2. In your fork, open the page's file, e.g. `src/content/docs/unix/index.mdx`, and click the pencil icon (**Edit this file**).
 
-3. Make your change, then choose **Commit changes** and open a pull request.
+3. Make your change and click **Commit changes**, committing to a new branch.
+
+4. GitHub then offers to **Compare & pull request**. Check that the base repository is `CUSeismoLab/Tutorial-post` with branch `main`, describe your change, and click **Create pull request**.
 
 </Steps>
 
@@ -31,20 +37,30 @@ You need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/) 24 (or 2
 
 <Steps>
 
-1. Clone the repository (or your fork of it) and enter the directory:
+1. Fork the repository: open [CUSeismoLab/Tutorial-post](https://github.com/CUSeismoLab/Tutorial-post) and click **Fork** in the top-right corner. This creates your own copy at `https://github.com/<your-username>/Tutorial-post`.
+
+2. Clone **your fork** (replace `<your-username>` with your GitHub username) and enter the directory:
 
    ```sh
-   git clone https://github.com/CUSeismoLab/Tutorial-post.git
+   git clone https://github.com/<your-username>/Tutorial-post.git
    cd Tutorial-post
    ```
 
-2. Install the dependencies:
+3. Add the original repository as the `upstream` remote, so you can keep your fork up to date:
+
+   ```sh
+   git remote add upstream https://github.com/CUSeismoLab/Tutorial-post.git
+   ```
+
+   `git remote -v` should now list `origin` (your fork) and `upstream` (CUSeismoLab).
+
+4. Install the dependencies:
 
    ```sh
    npm ci
    ```
 
-3. Start the development server:
+5. Start the development server:
 
    ```sh
    npm run dev
@@ -111,9 +127,11 @@ npm run verify
 
 <Steps>
 
-1. Create a branch for your work:
+1. Bring your `main` branch up to date with `upstream`, then create a branch for your work from it:
 
    ```sh
+   git switch main
+   git pull upstream main
    git switch -c fix-unix-typo
    ```
 
@@ -124,18 +142,22 @@ npm run verify
    git commit -m "Fix typo in the Unix chapter"
    ```
 
-3. Push the branch:
+3. Push the branch to your fork:
 
    ```sh
    git push -u origin fix-unix-typo
    ```
 
-4. Open a pull request on GitHub. Once it is reviewed and merged into `main`, the website updates automatically within a few minutes.
+4. Open your fork on GitHub and click **Compare & pull request**. Make sure the base repository is `CUSeismoLab/Tutorial-post` and the base branch is `main`, describe what you changed and why, and click **Create pull request**.
+
+5. A maintainer will review your pull request. If changes are requested, commit them to the same branch and push again; the pull request updates automatically. Once it is merged into `main`, the website updates within a few minutes.
 
 </Steps>
 
-The figure below shows how `git add`, `git commit`, and `git push` move your changes from your working directory to GitHub.
+The figure below shows how `git add`, `git commit`, and `git push` move your changes from your working directory to your fork on GitHub.
 
 <img src="/media/intro/git-chart.png" alt="git chart" style={{width: "60.0%"}} loading="lazy" />
+
+Start every new contribution from step 1, with a fresh branch based on the latest `upstream/main`.
 
 If you have questions, open an [issue](https://github.com/CUSeismoLab/Tutorial-post/issues) or [send us feedback](https://docs.google.com/forms/d/e/1FAIpQLScSQIcOtANjTonJDhK4KYmoA6H2lUHou9Mqz1oFCHSTd5wxhQ/viewform?usp=sf_link).
