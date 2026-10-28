@@ -3,36 +3,139 @@ title: "How to contribute"
 slug: intro/git-update
 ---
 
-:::note[About this edition]
-The instructions below describe the original Read the Docs repository. In this Astro edition, edit the `.mdx` files in `src/content/docs/` and run `npm run dev` to preview your changes. See the project README for the current build and publishing workflow.
-:::
+import { Steps } from '@astrojs/starlight/components';
 
-It's very easy for students to help make contributions to the CUSeisTut
+CUSeismoLab Tutorial is built with [Astro](https://astro.build/) and [Starlight](https://starlight.astro.build/). Every tutorial is a plain MDX file in the [CUSeismoLab/Tutorial-post](https://github.com/CUSeismoLab/Tutorial-post) repository, so fixing a typo, improving an explanation, or adding a new chapter only takes a text editor and Git. Changes merged into the `main` branch are built and published to the website automatically by GitHub Actions.
 
-Here are several steps based on github commands:
+## Quick edits on GitHub
 
-1. open a terminal in your computer
+For a small fix to a single page, you don't need to set anything up locally:
 
+<Steps>
 
-2. run: git clone [https://github.com/JunhaoSong/cuseistut.git](https://github.com/JunhaoSong/cuseistut.git)
+1. Open the page's file in the repository, e.g. `src/content/docs/unix/index.mdx`.
 
+2. Click the pencil icon (**Edit this file**). If you don't have write access, GitHub will create a fork for you.
 
-3. enter the cloned directory named “cuseistut” (you will find a hidden local repository named ".git" in the cloned directory)
+3. Make your change, then choose **Commit changes** and open a pull request.
 
+</Steps>
 
-4. make modifications
+## Edit and preview locally
 
+For larger changes, work on a local copy so you can preview the website before publishing.
 
-5. after 4, run: git add &lt;modified files/folders&gt;
+### Set up
 
+You need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/) 24 (or 22.23.4 or newer). If you use [nvm](https://github.com/nvm-sh/nvm), `nvm use` picks the right version from `.nvmrc`.
 
-6. after 5, run: git commit -m “message”
+<Steps>
 
+1. Clone the repository (or your fork of it) and enter the directory:
 
-7. after 6, run: git push (username and token are required, please contact Junhao Song for the temporary token.)
+   ```sh
+   git clone https://github.com/CUSeismoLab/Tutorial-post.git
+   cd Tutorial-post
+   ```
 
-steps 5, 6, 7 can be easily understood based on the figure below.
+2. Install the dependencies:
+
+   ```sh
+   npm ci
+   ```
+
+3. Start the development server:
+
+   ```sh
+   npm run dev
+   ```
+
+   Open the address printed in the terminal (normally `http://localhost:4321`). The page reloads automatically whenever you save a file.
+
+</Steps>
+
+### Where things live
+
+| Path | Content |
+| --- | --- |
+| `src/content/docs/<chapter>/index.mdx` | The text of each tutorial chapter |
+| `public/media/<chapter>/` | Images, notebooks, scripts, data, and other downloadable files |
+| `astro.config.mjs` | The sidebar and site settings |
+| `src/components/CourseCatalog.astro` | The course list on the homepage |
+
+### Writing content
+
+Chapters are written in Markdown, with a few extras:
+
+- Fenced code blocks (```` ```python ````) are syntax-highlighted.
+- Use `$...$` for inline equations and `$$...$$` for display equations (KaTeX).
+- Use `:::note`, `:::tip`, and `:::caution` for callout boxes.
+- Link to other chapters as `/chapter/` and to files as `/media/chapter/file.ext`. The deployment path is added automatically.
+
+Keep the `slug` in each chapter's front matter unchanged, so that existing links keep working.
+
+### Adding a new chapter
+
+<Steps>
+
+1. Create `src/content/docs/<chapter>/index.mdx` with a front matter block:
+
+   ```mdx
+   ---
+   title: "My new tutorial"
+   slug: my_new_tutorial
+   ---
+   ```
+
+2. Put its images and files in `public/media/<chapter>/`.
+
+3. Add the chapter to the sidebar in `astro.config.mjs`, under the appropriate level.
+
+4. Add it to the course list on the homepage in `src/components/CourseCatalog.astro`.
+
+</Steps>
+
+### Check before you push
+
+Run these commands before pushing to catch broken pages and links:
+
+```sh
+npm run check
+npm run build
+npm run verify
+```
+
+`npm run preview` serves the production build, including full-text search, which isn't available in the development server.
+
+## Submit your changes
+
+<Steps>
+
+1. Create a branch for your work:
+
+   ```sh
+   git switch -c fix-unix-typo
+   ```
+
+2. Stage and commit your changes:
+
+   ```sh
+   git add <modified files/folders>
+   git commit -m "Fix typo in the Unix chapter"
+   ```
+
+3. Push the branch:
+
+   ```sh
+   git push -u origin fix-unix-typo
+   ```
+
+4. Open a pull request on GitHub. Once it is reviewed and merged into `main`, the website updates automatically within a few minutes.
+
+</Steps>
+
+The figure below shows how `git add`, `git commit`, and `git push` move your changes from your working directory to GitHub.
 
 <img src="/media/intro/git-chart.png" alt="git chart" style={{width: "60.0%"}} loading="lazy" />
 
-After successfully pushing your modifications, check the updated [CUSeisTut website](/)
+If you have questions, open an [issue](https://github.com/CUSeismoLab/Tutorial-post/issues) or [send us feedback](https://docs.google.com/forms/d/e/1FAIpQLScSQIcOtANjTonJDhK4KYmoA6H2lUHou9Mqz1oFCHSTd5wxhQ/viewform?usp=sf_link).

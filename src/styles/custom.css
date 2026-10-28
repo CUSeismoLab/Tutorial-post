@@ -11,7 +11,8 @@
   --sl-color-accent-high: #3c2056;
 }
 html { scroll-padding-top: 6rem; }
-.site-title { font-weight: 750; letter-spacing: -0.04em; }
+.site-title { font-size: clamp(1rem, 1.5vw, 1.25rem); font-weight: 750; letter-spacing: -0.025em; line-height: 1.2; white-space: normal; }
+.site-title span { text-wrap: balance; }
 .sl-markdown-content { line-height: 1.8; }
 .sl-markdown-content img, .sl-markdown-content video { max-width: 100%; height: auto; }
 .sl-markdown-content img { border-radius: 0.5rem; }
@@ -24,32 +25,32 @@ html { scroll-padding-top: 6rem; }
 /* A course-focused landing page, with Starlight navigation and search. */
 :root[data-has-hero] .hero { padding-block: 4rem 2.5rem; gap: 2.5rem; }
 :root[data-has-hero] .hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.05; letter-spacing: -0.055em; }
-:root[data-has-hero] .hero .tagline { font-size: 1.15rem; line-height: 1.75; max-width: 36rem; }
+:root[data-has-hero] .hero .tagline { font-size: 1.3rem; line-height: 1.75; max-width: 36rem; }
 :root[data-has-hero] .hero img { width: 100%; height: auto; padding: 1.5rem; border-radius: 1.75rem; background: #f5f4f0; }
 .course-home { color: var(--sl-color-text); }
-.course-summary { display: flex; flex-wrap: wrap; gap: 1.2rem 2.5rem; padding: 1.4rem 0; border-block: 1px solid var(--sl-color-hairline); font-size: 0.9rem; }
-.course-summary strong { color: var(--sl-color-white); font-size: 1.2rem; margin-right: 0.3rem; }
+.course-summary { display: flex; flex-wrap: wrap; gap: 1.2rem 2.5rem; padding: 1.4rem 0; border-block: 1px solid var(--sl-color-hairline); font-size: 1.05rem; }
+.course-summary strong { color: var(--sl-color-white); font-size: 1.4rem; margin-right: 0.3rem; }
 .section-intro { margin: 4.5rem 0 2rem; max-width: 43rem; }
-.eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; color: var(--sl-color-accent-high); margin: 0 0 1rem; }
+.eyebrow { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--sl-color-accent-high); margin: 0 0 1rem; }
 .course-home h2 { color: var(--sl-color-white); font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.04em; line-height: 1.2; margin: 0 0 1rem; }
-.section-intro > p:last-child { line-height: 1.75; }
+.section-intro > p:last-child { font-size: 1.1rem; line-height: 1.75; }
 .course-tracks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; align-items: start; }
 .course-track { padding: 1.5rem; border: 1px solid var(--sl-color-hairline); border-radius: 1rem; background: var(--sl-color-bg-nav); }
 .track-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1.6rem; }
-.track-number { font-family: var(--sl-font-mono); color: var(--sl-color-accent); font-size: 1.4rem; }
-.level-label { padding: 0.25rem 0.65rem; border-radius: 2rem; background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); font-size: 0.7rem; }
-.course-track h3 { color: var(--sl-color-white); font-size: 1.35rem; letter-spacing: -0.035em; line-height: 1.3; margin: 0; }
-.track-description { font-size: 0.9rem; line-height: 1.7; margin: 0.8rem 0 1.2rem; min-height: 5rem; }
+.track-number { font-family: var(--sl-font-mono); color: var(--sl-color-accent); font-size: 1.6rem; }
+.level-label { padding: 0.25rem 0.65rem; border-radius: 2rem; background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); font-size: 0.8rem; }
+.course-track h3 { color: var(--sl-color-white); font-size: 1.5rem; letter-spacing: -0.035em; line-height: 1.3; margin: 0; }
+.track-description { font-size: 1.05rem; line-height: 1.7; margin: 0.8rem 0 1.2rem; min-height: 5rem; }
 .course-links { padding: 0; margin: 0; list-style: none; }
 .course-links li { margin: 0; border-top: 1px solid var(--sl-color-hairline); }
-.course-links a { display: flex; justify-content: space-between; gap: 0.7rem; align-items: start; padding: 0.8rem 0; font-size: 0.85rem; text-decoration: none; color: var(--sl-color-white); line-height: 1.5; }
+.course-links a { display: flex; justify-content: space-between; gap: 0.7rem; align-items: start; padding: 0.8rem 0; font-size: 1rem; text-decoration: none; color: var(--sl-color-white); line-height: 1.5; }
 .course-links a:hover, .resource-links a:hover { color: var(--sl-color-accent-high); }
 .course-links a span:last-child { color: var(--sl-color-accent); }
 .about-course { display: grid; grid-template-columns: 1.25fr 1fr; gap: 4rem; margin-top: 4.5rem; padding-block: 3rem; border-top: 1px solid var(--sl-color-hairline); }
-.about-course p:not(.eyebrow) { font-size: 0.95rem; line-height: 1.8; }
+.about-course p:not(.eyebrow) { font-size: 1.1rem; line-height: 1.8; }
 .about-link { display: inline-block; margin-top: 0.8rem; font-weight: 600; text-decoration: none; }
 .resource-links { padding: 1.5rem; border-radius: 1rem; background: var(--sl-color-bg-nav); align-self: start; }
-.resource-links a { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; font-size: 0.85rem; text-decoration: none; color: var(--sl-color-white); border-top: 1px solid var(--sl-color-hairline); }
+.resource-links a { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; font-size: 1rem; text-decoration: none; color: var(--sl-color-white); border-top: 1px solid var(--sl-color-hairline); }
 @media (max-width: 65rem) {
   .course-tracks { grid-template-columns: 1fr; }
   .track-description { min-height: 0; }

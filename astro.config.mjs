@@ -21,10 +21,10 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: 'CUSeisTut',
+      title: 'CUHK Seismology LAB',
       description: 'Hands-on seismology tutorials from the CUHK Seismology Lab. Learn scientific computing, seismic data processing, earthquake sources, and Earth structure.',
       favicon: '/favicon.svg',
-      social: [{ icon: 'github', label: 'Original course repository', href: 'https://github.com/JunhaoSong/cuseistut' }],
+      social: [{ icon: 'github', label: 'Original course repository', href: 'https://github.com/CUSeismoLab/Tutorial-post' }],
       customCss: ['katex/dist/katex.min.css', './src/styles/custom.css'],
       components: { Hero: './src/components/Hero.astro' },
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
@@ -43,7 +43,7 @@ export default defineConfig({
           { label: 'STA/LTA earthquake detection', slug: 'sta_lta' },
           { label: 'Absolute earthquake location', slug: 'abs_loc' },
         ] },
-        { label: 'Advanced level', collapsed: true, items: [
+        { label: 'Advanced level', items: [
           { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
           { label: 'FK & CAP installation', slug: 'fk' },
           { label: 'Earthquake Transformer', slug: 'eqt' },
