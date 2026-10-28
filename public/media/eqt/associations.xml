@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<q:quakeml xmlns="http://quakeml.org/xmlns/bed/1.2" xmlns:q="http://quakeml.org/xmlns/quakeml/1.2">
+  <eventParameters publicID="smi:local/07d49f06-67df-497f-b375-e5a416c8f183">
+    <event publicID="smi:local/2e654f63-93cf-45d6-9664-7b55a69477e7">
+      <preferredOriginID>smi:local/97d273e1-a9dc-429b-a1c1-7cd4f4e832b8</preferredOriginID>
+      <origin publicID="smi:local/97d273e1-a9dc-429b-a1c1-7cd4f4e832b8">
+        <time>
+          <value>2015-08-11T16:22:57.180000Z</value>
+        </time>
+        <latitude>
+          <value>-10.8919</value>
+        </latitude>
+        <longitude>
+          <value>122.8225</value>
+        </longitude>
+      </origin>
+      <pick publicID="smi:local/a887c2ed-285b-4041-bd32-a3af4d7ea879">
+        <time>
+          <value>2015-08-11T16:22:51.340000Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="ONIX"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>P</phaseHint>
+      </pick>
+      <pick publicID="smi:local/b9bada36-eaa1-489c-9002-b912daf789bf">
+        <time>
+          <value>2015-08-11T16:22:52.480000Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="ONIX"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>S</phaseHint>
+      </pick>
+      <pick publicID="smi:local/ca57ffba-2775-4947-bc3a-2eefbf9444cf">
+        <time>
+          <value>2015-08-11T16:22:54.010001Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="PPLA"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>P</phaseHint>
+      </pick>
+      <pick publicID="smi:local/092acdba-7c22-4ad6-833a-434b530dbe63">
+        <time>
+          <value>2015-08-11T16:23:23.900001Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="PPLA"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>S</phaseHint>
+      </pick>
+      <pick publicID="smi:local/950f0140-1aa8-4720-8e19-3260c60bc57a">
+        <time>
+          <value>2015-08-11T16:22:57.230000Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="GREG"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>P</phaseHint>
+      </pick>
+      <pick publicID="smi:local/ce3d5754-3b29-4d00-a0eb-fdabdc91bcf4">
+        <time>
+          <value>2015-08-11T16:22:58.710000Z</value>
+        </time>
+        <waveformID networkCode="YS" stationCode="GREG"></waveformID>
+        <methodID>smi:local/EqTransformer</methodID>
+        <phaseHint>S</phaseHint>
+      </pick>
+    </event>
+  </eventParameters>
+</q:quakeml>

@@ -1,0 +1,76 @@
+---
+import { withBase } from '../lib/paths';
+
+const levels = [
+  {
+    number: '01', title: 'Build your toolkit', level: 'Entry level',
+    description: 'Get comfortable with the command line, make maps, and work with seismic waveforms.',
+    courses: [
+      ['unix', 'Unix commands'], ['gmt6-1', 'GMT · Topographic maps'], ['gmt6-2', 'GMT · Seismic data'],
+      ['obspy-1', 'ObsPy · Request data'], ['obspy-2', 'ObsPy · Process data'],
+    ],
+  },
+  {
+    number: '02', title: 'Find the earthquakes', level: 'Intermediate level',
+    description: 'Turn seismic records into detections and locate earthquake hypocenters.',
+    courses: [['sta_lta', 'STA/LTA earthquake detection'], ['abs_loc', 'Absolute earthquake location']],
+  },
+  {
+    number: '03', title: 'Explore the physics', level: 'Advanced level',
+    description: 'Investigate earthquake sources, simulate fault rupture, and image Earth’s interior.',
+    courses: [
+      ['gcap', 'Focal mechanisms with gCAP'], ['fk', 'FK & CAP installation'], ['eqt', 'Earthquake Transformer'],
+      ['dd_loc', 'Double-difference relocation'], ['source_spectra', 'Spectral analysis'],
+      ['pylith_static', 'Static stress change with PyLith'], ['pylith_dynamic', 'Dynamic rupture simulation'],
+      ['body_tomo', 'Body wave tomography'], ['surface_tomo', 'Surface wave tomography'],
+      ['ambient_tomo', 'Ambient noise cross correlation'],
+    ],
+  },
+];
+---
+
+<div class="course-home not-content">
+  <div class="course-summary" aria-label="Course overview">
+    <span><strong>17</strong> practical modules</span>
+    <span><strong>3</strong> learning levels</span>
+    <span>Code, waveforms &amp; datasets</span>
+  </div>
+
+  <section id="learning-path" aria-labelledby="path-title">
+    <div class="section-intro">
+      <p class="eyebrow">A PATH FROM THE BASICS TO RESEARCH</p>
+      <h2 id="path-title">Choose your starting point.</h2>
+      <p>Follow the sequence, or jump into the technique you need. Each module combines an explanation with practical exercises.</p>
+    </div>
+    <div class="course-tracks">
+      {levels.map(({ number, title, level, description, courses }) => (
+        <section class="course-track" aria-labelledby={`level-${number}`}>
+          <div class="track-top"><span class="track-number">{number}</span><span class="level-label">{level}</span></div>
+          <h3 id={`level-${number}`}>{title}</h3>
+          <p class="track-description">{description}</p>
+          <ul class="course-links">
+            {courses.map(([slug, label]) => <li><a href={withBase(`${slug}/`)}><span>{label}</span><span aria-hidden="true">↗</span></a></li>)}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="about-course" aria-labelledby="about-title">
+    <div>
+      <p class="eyebrow">FROM THE CUHK SEISMOLOGY LAB</p>
+      <h2 id="about-title">Learn by working with data.</h2>
+      <p>CUSeisTut provides guidance and training for students interested in seismology. The tutorials bring together scientific concepts, runnable examples, and downloadable data.</p>
+      <p>This document is developed and maintained by the <a href="http://www.cuhk.edu.hk/sci/essc/yang/">CUHK Seismology Lab</a>.</p>
+      <a class="about-link" href={withBase('appendix/')}>Meet the contributors <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="resource-links" aria-label="Course resources">
+      <p class="eyebrow">KEEP EXPLORING</p>
+      <a href={withBase('gmt6/')}>Complete original GMT tutorial <span aria-hidden="true">↗</span></a>
+      <a href={withBase('intro/git-update/')}>Contribute to the tutorials <span aria-hidden="true">↗</span></a>
+      <a href="http://www.cuhk.edu.hk/sci/essc/pg_prg.html">CUHK EASC Graduate Division <span aria-hidden="true">↗</span></a>
+      <a href="https://cryocuhk.github.io">CUHK Cryosphere Lab <span aria-hidden="true">↗</span></a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScSQIcOtANjTonJDhK4KYmoA6H2lUHou9Mqz1oFCHSTd5wxhQ/viewform?usp=sf_link">Give us feedback <span aria-hidden="true">↗</span></a>
+    </aside>
+  </section>
+</div>

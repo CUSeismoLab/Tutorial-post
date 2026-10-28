@@ -1,0 +1,379 @@
+---
+title: "FK & CAP Installation Guide"
+slug: fk
+---
+
+These instructions are adapted from:
+
+[https://seiswave.cn/oh-my-cap/install/](https://seiswave.cn/oh-my-cap/install/)
+
+[https://cuseistut.readthedocs.io/en/latest/gcap/index.html\#/](/gcap/)
+
+The test systems are macOS 15.6.1 and Ubuntu 18.04.6
+
+If you have any questions, please contact [qilidai@cuhk.edu.hk](mailto:qilidai@cuhk.edu.hk)
+
+## 1. Package required
+
+Compilers &amp; build tools: gcc, gfortran, make
+
+Seismic tools: rdseed, SAC, TauP, FK, gCAP
+
+Plotting: GMT6
+
+## 2. Installation
+
+2.1 Compile tools
+
+*2.1.1 MacOS*
+
+Install Homebrew
+
+```text
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$ brew install gcc gfortran make
+```
+
+*2.1.2 Linux*
+
+```text
+$ sudo apt-get install gcc gfortran
+```
+
+2.2 rdseed
+
+rdseed [rdseedv5.3.1.tar.gz](/media/fk/rdseedv5.3.1.tar.gz) is used to convert SEED files to SAC format
+
+Reference: [https://blog.seisman.info/rdseed-install/](https://blog.seisman.info/rdseed-install/)
+
+```text
+$ tar -xvf rdseedv5.3.1.tar.gz
+$ mkdir ~/opt
+$ mv rdseedv5.3.1 ~/opt
+$ cd ~/opt/rdseedv5.3.1
+
+#For MacOS, run following lines 
+$ ./rdseed.mac.x86_64
+$ xattr -d com.apple.quarantine rdseed.mac.x86_64
+$ mv rdseed.mac.x86_64 rdseed
+$ echo 'export PATH=${HOME}/opt/rdseedv5.3.1:${PATH}'>> ~/.zshrc
+
+#For Linux, run following lines
+$ ./rdseed.rh6.linux_64
+$ mv rdseed.rh6.linux_64 rdseed
+$ echo 'export PATH=${HOME}/opt/rdseedv5.3.1:${PATH}'>> ~/.bashrc
+```
+
+2.3 SAC
+
+SAC is used to process sac file
+
+Reference:
+
+[https://seisman.github.io/SAC\_Docs\_zh/install/](https://seisman.github.io/SAC_Docs_zh/install/)
+
+You need to download the package by yourself using following link:
+
+[http://ds.iris.edu/ds/nodes/dmc/forms/sac/](http://ds.iris.edu/ds/nodes/dmc/forms/sac/)
+
+*2.3.1 MacOS*
+
+```text
+$ xcode-select --install
+$ brew install --cask xquartz
+$ tar -xvf sac-102.0-mac.tar.gz
+$ sudo mv sac /usr/local
+#Add environment variables:
+$ echo 'export SACHOME=/usr/local/sac' >> ~/.zshrc
+$ echo 'export SACAUX=${SACHOME}/aux' >> ~/.zshrc
+$ echo 'export PATH=${SACHOME}/bin:${PATH}' >> ~/.zshrc
+$ echo 'export SAC_DISPLAY_COPYRIGHT=1' >> ~/.zshrc
+$ echo 'export SAC_PPK_LARGE_CROSSHAIRS=1' >> ~/.zshrc
+$ echo 'export SAC_USE_DATABASE=0' >> ~/.zshrc
+$ source ~/.zshrc
+$ sac
+```
+
+*2.3.2 Linux*
+
+```text
+$ sudo apt update
+$ sudo apt install libc6 libsm6 libice6 libxpm4 libx11-6
+$ sudo apt install zlib1g libncurses6
+$ tar -xvf sac-102.0-linux_x86_64.tar.gz 
+$ sudo mv sac /usr/local 
+#Add environment variables:
+$ echo 'export SACHOME=/usr/local/sac' >> ~/.bashrc
+$ echo 'export SACAUX=${SACHOME}/aux' >> ~/.bashrc
+$ echo 'export PATH=${SACHOME}/bin:${PATH}' >> ~/.bashrc
+$ echo 'export SAC_DISPLAY_COPYRIGHT=1' >> ~/.bashrc
+$ echo 'export SAC_PPK_LARGE_CROSSHAIRS=1' >> ~/.bashrc
+$ echo 'export SAC_USE_DATABASE=0' >> ~/.bashrc
+$ source ~/.bashrc
+$ sac
+```
+
+2.4 GMT6
+
+GMT is used for high-quality plotting
+
+Reference: [https://docs.gmt-china.org/latest/install/](https://docs.gmt-china.org/latest/install/)
+
+*2.4.1 MacOS*
+
+```text
+$ brew update && brew upgrade
+$ brew install gmt
+$ brew install ghostscript
+$ brew install graphicsmagick
+$ brew install ffmpeg
+$ gmt --version
+```
+
+*2.4.2 Linux*
+
+```text
+$ sudo apt update
+$ sudo apt install gmt gmt-dcw gmt-gshhg
+$ sudo apt install xdg-utils
+$ sudo apt install gdal-bin
+$ sudo apt install ghostscript
+$ sudo apt install graphicsmagick
+$ sudo apt install ffmpeg
+$ gmt --version
+```
+
+If the version is not GMT6, see: [https://docs.gmt-china.org/latest/install/conda/](https://docs.gmt-china.org/latest/install/conda/)
+
+2.5 TauP
+
+TauP [TauP-2.6.1.tgz](/media/fk/TauP-2.6.1.tgz) is used to calculate theoretical ray paths and arrival times
+
+Reference: [https://seismo-learn.org/software/taup/install/](https://seismo-learn.org/software/taup/install/)
+
+For MacOS, run following lines to install JAVA
+
+```text
+$ brew install openjdk
+$ sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+For Linux, run following lines to install JAVA
+
+```text
+$ sudo apt install default-jdk
+$ java -version
+```
+
+```text
+$ wget http://www.seis.sc.edu/downloads/TauP/TauP-2.6.1.tgz
+$ tar -xvf TauP-2.6.1.tgz
+$ mkdir -p ~/opt/
+$ mv TauP-2.6.1 ~/opt/
+```
+
+For MacOS, run following lines
+
+```text
+$ echo 'export PATH=${HOME}/opt/TauP-2.6.1/bin:${PATH}' >> ~/.zshrc
+$ source ~/.zshrc
+$ taup
+```
+
+For Linux, run following lines
+
+```text
+$ echo 'export PATH=${HOME}/opt/TauP-2.6.1/bin:${PATH}' >> ~/.bashrc
+$ source ~/.bashrc
+$ taup
+```
+
+2.6 FK
+
+FK computes synthetic Green’s functions for layered velocity models written by Prof. Lupei ZHU
+
+Source:
+
+[http://www.eas.slu.edu/People/LZhu/downloads/fk3.3.tar/](http://www.eas.slu.edu/People/LZhu/downloads/fk3.3.tar/)
+
+[https://seismo-learn.org/software/fk/install/](https://seismo-learn.org/software/fk/install/)
+
+We recommend using oh-my-cap (simpler on macOS):
+
+[https://seiswave.cn/oh-my-cap/install/](https://seiswave.cn/oh-my-cap/install/)
+
+```text
+$ wget https://github.com/wangliang1989/oh-my-cap/archive/v2.0.0.tar.gz
+$ tar -zxvf v2.0.0.tar.gz
+$ mv oh-my-cap-2.0.0 ~/opt/
+$ cd ~/opt/oh-my-cap/src/fk
+$ make
+```
+
+For MacOS, run following lines
+
+```text
+$ echo 'export PATH=${HOME}/opt/oh-my-cap-2.0.0/src/fk:${PATH}' >> ~/.zshrc
+$ source ~/.zshrc
+$ fk.pl
+```
+
+For Linux, run following lines
+
+```text
+$ echo 'export PATH=${HOME}/opt/oh-my-cap-2.0.0/src/fk:${PATH}' >> ~/.bashrc
+$ source ~/.bashrc
+$ fk.pl
+```
+
+2.7 CAP
+
+CAP is a focal-mechanism inversion method developed by Prof. Lupei ZHU.
+
+Source:
+
+[http://www.eas.slu.edu/People/LZhu/downloads/gcap1.0.tar/](http://www.eas.slu.edu/People/LZhu/downloads/gcap1.0.tar/)
+
+[https://blog.seisman.info/gcap-install/](https://blog.seisman.info/gcap-install/)
+
+We recommend using oh-my-cap (simpler on macOS):
+
+[https://seiswave.cn/oh-my-cap/install/](https://seiswave.cn/oh-my-cap/install/)
+
+```text
+$ cd ~/opt/oh-my-cap/src/gcap
+$ make
+```
+
+For MacOS, run following lines
+
+```text
+$ echo 'export OH_MY_CAP=${HOME}/opt/oh-my-cap-2.0.0' >>  ~/.zshrc
+$ echo 'export PATH=${HOME}/opt/oh-my-cap-2.0.0/src/gcap:${PATH}' >> ~/.zshrc
+$ source ~/.zshrc
+$ cap.pl
+```
+
+For Linux, run following lines
+
+```text
+$ echo 'export OH_MY_CAP=${HOME}/opt/oh-my-cap-2.0.0' >>  ~/.bashrc
+$ echo 'export PATH=${HOME}/opt/oh-my-cap-2.0.0/src/gcap:${PATH}' >> ~/.bashrc
+$ source ~/.bashrc
+$ cap.pl
+```
+
+## 3. Run an example
+
+3.1 Calculate Green’s function (FK)
+
+```text
+$ cd ~/opt/oh-my-cap Glib
+$ perl run_fk.pl model.fk
+```
+
+3.2 Data pre-processing
+
+```text
+$ cd ../example/
+$ perl process.pl 20080418093658
+```
+
+3.3 Inversion (CAP)
+
+```text
+$ perl weight.pl 20080418093658
+$ perl inversion.pl 20080418093658
+$ perl gmt6depth.pl 20080418093658
+$ perl depth.pl 20080418093658
+```
+
+## 4. Optional: Install pyfk
+
+Reference: [https://github.com/ziyixi/pyfk/blob/master/docs/introduction/install.rst/](https://github.com/ziyixi/pyfk/blob/master/docs/introduction/install.rst/)
+
+```text
+$ conda create -n fk python=3.9 -y
+$ conda activate fk
+$ conda install -c conda-forge -y  numpy=1.26 "cython<3" setuptools wheel scipy make notebook
+```
+
+For MacOS, run following lines
+
+```text
+$ pip install cysignals pyfk --no-build-isolation
+$ jupyter notebook
+```
+
+For Linux, run following lines
+
+```text
+$ pip install cysignals pyfk
+$ jupyter notebook
+```
+
+Open and run pyfk.ipynb [./pyfk.ipynb](/media/fk/pyfk.ipynb)
+
+This notebook was written by Khalil and revised by Qili
+
+## 5. Exercises
+
+The displacement in a uniform whole-space produced by a single force $F_p$ at the origin is
+
+$$
+u_i(\mathbf{r}, t) =
+\frac{3\gamma_i \gamma_p - \delta_{ip}}{4\pi \rho r^3}
+\int_{r/\alpha}^{r/\beta} \tau F_p(t-\tau)\, d\tau
++ \frac{\gamma_i \gamma_p}{4\pi \rho \alpha^2 r}
+F_p\!\left(t-\frac{r}{\alpha}\right)
++ \frac{\delta_{ip}-\gamma_i \gamma_p}{4\pi \rho \beta^2 r}
+F_p\!\left(t-\frac{r}{\beta}\right)
+$$
+
+where $\gamma_i=\dfrac{x_i}{r}$ is the $i$-th component of the unit vector $\hat{\mathbf r}$. This is one of the most important solutions in seismology and was first given by Stokes in 1849. The first term on the RHS is called the near field because it decays rapidly with distance. The other two terms are called the far-field $P$ and $S$ wavefields, respectively. When the source time function is an impulse, the far-field $P$ and $S$ waveforms are impulsive, but the near-field waveform is a ramp starting at the $P$ arrival time and ending at the $S$ arrival time.
+
+A sample Matlab program for computing displacement generated by a single force in a whole space is given below:
+
+```text
+clear all;close all
+% model parameters of the whole-space
+vp = 6.3;
+vs = 3.6;
+% sampling rate
+dt = 0.01;
+% force vector
+F = [0; 0; 1];
+% receiver location
+r = [3; 0; 10];
+% compute the amplitudes of the nearfield and far-fields
+dist = norm(r);
+gamma = r/dist;
+gammaDotF = gamma'*F;
+AnearField = (3*gammaDotF*gamma-F)/(dist*dist*dist);
+AfarP = gamma*(gammaDotF/(vp*vp*dist));
+AfarS = (F-gammaDotF*gamma)/(vs*vs*dist);
+% construct the time functions of the nearfield and far-fields
+tp = dist/vp;
+itp = round(tp/dt);
+ts = dist/vs;
+its = round(ts/dt);
+nt = its + 100;
+t = (0:nt-1)*dt;
+nearField = zeros(3,nt);
+farP = zeros(3,nt);
+farS = zeros(3,nt);
+nearField(:,itp:its) = AnearField*t(itp:its);
+farP(:,itp) = AfarP/dt;
+farS(:,its) = AfarS/dt;
+disp = nearField + farP + farS;
+subplot(4,1,1),plot(t,nearField(3,:))
+subplot(4,1,2),plot(t,farP(3,:))
+subplot(4,1,3),plot(t,farS(3,:))
+subplot(4,1,4),plot(t,disp(3,:))
+```
+
+1. Following the above equation and the provided MATLAB code, write a Python function to calculate the displacement $\mathbf{u}(\mathbf{r},t)$ produced by a single force $\mathbf{F}$ in a homogeneous whole-space with velocities $V_p$, $V_s$, and density $\rho$, assuming that the source time history is a step function.
+
+2. Use the FK package to compute synthetic seismograms for the same single-force source using identical model parameters. Plot the resulting waveforms and compare them with those obtained from the analytical solution.
+
+3. Select a study region of your interest. Download a representative 1-D velocity model for that region (e.g., CRUST1.0 or another published regional model). Then visit [https://www.globalcmt.org/](https://www.globalcmt.org/) to identify one or more earthquake events located within the selected region. (a) Extract the source parameters (location, focal mechanism, and centroid depth) from the Global CMT catalog. (b) Using a double-couple source representation, compute synthetic seismograms with the FK package for the catalog depth. (c) Repeat the calculations for several hypothetical source depths (e.g., ±10–20 km relative to the catalog depth) while keeping the focal mechanism unchanged. (d) Compare the resulting waveforms and discuss how source depth influences P-, S-, and surface-wave amplitudes and arrival characteristics in the selected region.

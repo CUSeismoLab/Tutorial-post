@@ -1,0 +1,26 @@
+================== Overal Info ==============================
+date of report: 2022-03-08 23:47:41.815419
+input_hdf5: mseed_data_processed_hdfs/GREG.hdf5
+input_csv: mseed_data_processed_hdfs/GREG.csv
+input_model: ../ModelsAndSampleData/EqT_model.h5
+output_dir: /home/bowie/lamlam_eqt/EQTransformer/EQT_tutorial/detections/GREG_outputs
+================== Prediction Parameters =======================
+finished the prediction in:  0 hours and 0 minutes and 16.41 seconds 
+detected: 1 events.
+writting_probability_outputs: False
+loss_types: ['binary_crossentropy', 'binary_crossentropy', 'binary_crossentropy']
+loss_weights: [0.03, 0.4, 0.58]
+batch_size: 500
+================== Other Parameters =========================
+normalization_mode: std
+estimate uncertainty: False
+number of Monte Carlo sampling: 5
+detection_threshold: 0.3
+P_threshold: 0.1
+S_threshold: 0.1
+number_of_plots: 100
+use_multiprocessing: True
+gpuid: None
+gpu_limit: None
+keepPS: True
+spLimit: 60 seconds

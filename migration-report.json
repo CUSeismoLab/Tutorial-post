@@ -1,0 +1,1823 @@
+{
+  "source": "/Users/xumijian/Documents/cuseistut/docs/source",
+  "converter": "Pandoc RST AST with explicit MDX writer",
+  "pages": [
+    {
+      "source": "GMT6/index.rst",
+      "target": "src/content/docs/GMT6/index.mdx",
+      "slug": "gmt6",
+      "title": "Generic Mapping Tools",
+      "counts": {
+        "headings": 18,
+        "links": 15,
+        "images": 18,
+        "admonitions": 5,
+        "code_blocks": 8,
+        "downloads": 9
+      },
+      "expected_counts": {
+        "code_blocks": 8,
+        "images": 18,
+        "display_math": 0,
+        "admonitions": 5,
+        "downloads": 9
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [
+        "https://www.generic-mapping-tools.org/_static/gmt-logo.png",
+        "https://docs.generic-mapping-tools.org/6.3/_images/ex07.png"
+      ],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "what-is-gmt",
+          "text": "What is GMT?"
+        },
+        {
+          "id": "what-can-gmt-do",
+          "text": "What can GMT do?"
+        },
+        {
+          "id": "how-to-install-gmt",
+          "text": "How to install GMT?"
+        },
+        {
+          "id": "start-with-three-simple-examples",
+          "text": "Start with three simple examples"
+        },
+        {
+          "id": "basic-structure-of-gmt-script",
+          "text": "Basic structure of GMT script"
+        },
+        {
+          "id": "plotting-topographic-map",
+          "text": "Plotting topographic map"
+        },
+        {
+          "id": "preview",
+          "text": "Preview"
+        },
+        {
+          "id": "step-by-step-explanation",
+          "text": "Step-by-Step explanation"
+        },
+        {
+          "id": "plotting-earthquake-catalog",
+          "text": "Plotting earthquake catalog"
+        },
+        {
+          "id": "preview-1",
+          "text": "Preview"
+        },
+        {
+          "id": "step-by-step-explanation-1",
+          "text": "Step-by-Step explanation"
+        },
+        {
+          "id": "plotting-cross-sections",
+          "text": "Plotting cross sections"
+        },
+        {
+          "id": "preview-2",
+          "text": "Preview"
+        },
+        {
+          "id": "excercises",
+          "text": "Excercises"
+        },
+        {
+          "id": "reproduce-figure-1-in-the-paper",
+          "text": "Reproduce figure 1 in the paper"
+        },
+        {
+          "id": "plot-a-cross-section-plot-based-on-the-catalog-generated-in-the-unix-command-tutorial",
+          "text": "Plot a cross-section plot based on the catalog generated in the Unix command tutorial"
+        },
+        {
+          "id": "plot-the-magnitude-variation-figure.-refer-to-figure-4b-in-the-paper",
+          "text": "Plot the magnitude variation figure. Refer to Figure 4b in the paper"
+        }
+      ]
+    },
+    {
+      "source": "GMT6-1/index.rst",
+      "target": "src/content/docs/GMT6-1/index.mdx",
+      "slug": "gmt6-1",
+      "title": "Generic Mapping Tools - Topographic Map",
+      "counts": {
+        "headings": 9,
+        "links": 10,
+        "images": 10,
+        "admonitions": 5,
+        "code_blocks": 6,
+        "downloads": 4
+      },
+      "expected_counts": {
+        "code_blocks": 6,
+        "images": 10,
+        "display_math": 0,
+        "admonitions": 5,
+        "downloads": 4
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [
+        "https://www.generic-mapping-tools.org/_static/gmt-logo.png",
+        "https://docs.generic-mapping-tools.org/6.3/_images/ex07.png"
+      ],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "what-is-gmt",
+          "text": "What is GMT?"
+        },
+        {
+          "id": "what-can-gmt-do",
+          "text": "What can GMT do?"
+        },
+        {
+          "id": "how-to-install-gmt",
+          "text": "How to install GMT?"
+        },
+        {
+          "id": "start-with-three-simple-examples",
+          "text": "Start with three simple examples"
+        },
+        {
+          "id": "basic-structure-of-gmt-script",
+          "text": "Basic structure of GMT script"
+        },
+        {
+          "id": "plotting-topographic-map",
+          "text": "Plotting topographic map"
+        },
+        {
+          "id": "preview",
+          "text": "Preview"
+        },
+        {
+          "id": "step-by-step-explanation",
+          "text": "Step-by-Step explanation"
+        }
+      ]
+    },
+    {
+      "source": "GMT6-2/index.rst",
+      "target": "src/content/docs/GMT6-2/index.mdx",
+      "slug": "gmt6-2",
+      "title": "Generic Mapping Tools - Seismic Data",
+      "counts": {
+        "headings": 9,
+        "links": 5,
+        "images": 8,
+        "code_blocks": 2,
+        "downloads": 5
+      },
+      "expected_counts": {
+        "code_blocks": 2,
+        "images": 8,
+        "display_math": 0,
+        "admonitions": 0,
+        "downloads": 5
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "plotting-earthquake-catalog",
+          "text": "Plotting earthquake catalog"
+        },
+        {
+          "id": "preview",
+          "text": "Preview"
+        },
+        {
+          "id": "step-by-step-explanation",
+          "text": "Step-by-Step explanation"
+        },
+        {
+          "id": "plotting-cross-sections",
+          "text": "Plotting cross sections"
+        },
+        {
+          "id": "preview-1",
+          "text": "Preview"
+        },
+        {
+          "id": "excercises",
+          "text": "Excercises"
+        },
+        {
+          "id": "reproduce-figure-1-in-the-paper",
+          "text": "Reproduce figure 1 in the paper"
+        },
+        {
+          "id": "plot-a-cross-section-plot-based-on-the-catalog-generated-in-the-unix-command-tutorial",
+          "text": "Plot a cross-section plot based on the catalog generated in the Unix command tutorial"
+        },
+        {
+          "id": "plot-the-magnitude-variation-figure.-refer-to-figure-4b-in-the-paper",
+          "text": "Plot the magnitude variation figure. Refer to Figure 4b in the paper"
+        }
+      ]
+    },
+    {
+      "source": "abs_loc/index.rst",
+      "target": "src/content/docs/abs_loc/index.mdx",
+      "slug": "abs_loc",
+      "title": "Earthquake Absolute Location",
+      "counts": {
+        "headings": 34,
+        "images": 15,
+        "display_math": 25,
+        "inline_math": 60,
+        "links": 2,
+        "admonitions": 5,
+        "code_blocks": 44,
+        "downloads": 2
+      },
+      "expected_counts": {
+        "code_blocks": 44,
+        "images": 15,
+        "display_math": 25,
+        "admonitions": 5,
+        "downloads": 2
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Recovered a dollar-delimited sigma equation and a spaced math role.",
+        "Restored indentation of the covariance-matrix note."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "introduction",
+          "text": "Introduction"
+        },
+        {
+          "id": "theory-background",
+          "text": "Theory Background"
+        },
+        {
+          "id": "contents-of-this-tutorial",
+          "text": "Contents of this tutorial"
+        },
+        {
+          "id": "python-environment-and-model-setup",
+          "text": "Python Environment and model Setup"
+        },
+        {
+          "id": "python-environment",
+          "text": "Python environment"
+        },
+        {
+          "id": "model-setup",
+          "text": "Model setup"
+        },
+        {
+          "id": "the-grid-search-method",
+          "text": "The Grid-Search Method"
+        },
+        {
+          "id": "set-up-grids",
+          "text": "1. Set up grids"
+        },
+        {
+          "id": "try-each-grid-and-calculate-error",
+          "text": "2. Try each grid and calculate error"
+        },
+        {
+          "id": "find-the-minimum-misfit-grid",
+          "text": "3. Find the minimum misfit grid"
+        },
+        {
+          "id": "exercise",
+          "text": "Exercise"
+        },
+        {
+          "id": "iterative-method",
+          "text": "Iterative Method"
+        },
+        {
+          "id": "give-an-initial-source-parameters",
+          "text": "1. Give an initial source parameters"
+        },
+        {
+          "id": "calculate-the-arrival-times-based-on-input-location",
+          "text": "2. Calculate the arrival times based on input location"
+        },
+        {
+          "id": "measure-the-misfit-between-the-d_obs-and-the-d_cal",
+          "text": "3. Measure the misfit between the d_{obs} and the d_{cal}"
+        },
+        {
+          "id": "calculate-partial-derivatives",
+          "text": "4. Calculate Partial Derivatives"
+        },
+        {
+          "id": "estimation-of-delta-m-generalized-inversion-problem",
+          "text": "5. Estimation of \\Delta m, generalized inversion problem"
+        },
+        {
+          "id": "update-hypocenter",
+          "text": "6. Update hypocenter"
+        },
+        {
+          "id": "start-new-iteration",
+          "text": "7. Start new iteration"
+        },
+        {
+          "id": "integrated-solution",
+          "text": "8. Integrated Solution"
+        },
+        {
+          "id": "exercise-10-min",
+          "text": "Exercise (10 min)"
+        },
+        {
+          "id": "more-practical-case",
+          "text": "More Practical Case"
+        },
+        {
+          "id": "phase-picking-error",
+          "text": "Phase-Picking Error"
+        },
+        {
+          "id": "error-analysis",
+          "text": "Error analysis"
+        },
+        {
+          "id": "summary",
+          "text": "Summary"
+        },
+        {
+          "id": "one-layer-model",
+          "text": "One layer model"
+        },
+        {
+          "id": "the-grid-search-method-and-the-iteraive-method",
+          "text": "The grid search method and the iteraive method"
+        },
+        {
+          "id": "convenient-functions",
+          "text": "Convenient functions"
+        },
+        {
+          "id": "play-around-new-station-dataset",
+          "text": "Play around new station dataset"
+        },
+        {
+          "id": "homework",
+          "text": "Homework"
+        },
+        {
+          "id": "tutorial-source-code",
+          "text": "Tutorial source code"
+        },
+        {
+          "id": "hypoinverse-tutorial",
+          "text": "HYPOINVERSE Tutorial"
+        },
+        {
+          "id": "introduction-of-hypoinverse",
+          "text": "Introduction of HYPOINVERSE"
+        },
+        {
+          "id": "environment-and-example",
+          "text": "Environment and example"
+        }
+      ]
+    },
+    {
+      "source": "ambient_tomo/index.rst",
+      "target": "src/content/docs/ambient_tomo/index.mdx",
+      "slug": "ambient_tomo",
+      "title": "Ambient noise cross correlation",
+      "counts": {
+        "headings": 15,
+        "admonitions": 5,
+        "inline_math": 9,
+        "display_math": 1,
+        "images": 6,
+        "code_blocks": 8,
+        "links": 2
+      },
+      "expected_counts": {
+        "code_blocks": 8,
+        "images": 6,
+        "display_math": 1,
+        "admonitions": 5,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Extended short underline for 'A Brief Introdcution of Ambient Noise Cross-correlation'.",
+        "Extended short underline for '1.1 What is Ambient Noise?'.",
+        "Extended short underline for '1.2  Ambient noise cross correlation'.",
+        "Extended short underline for '1.4 Data Preparation and inital processing'.",
+        "Extended short underline for '2.6 One-bit Normalization'.",
+        "Normalized Unicode mathematical glyphs to equivalent TeX symbols."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [
+        "https://cdn.nextjournal.com/data/QmfCUzBPFZy4GCd3NCX4ZBYF97UdBUU3zmdNyzKSUp4rBz?filename=xcorr.png&content-type=image/png",
+        "http://volc_seis_commission.leeds.ac.uk/images/stories/crossc.jpg",
+        "http://volc_seis_commission.leeds.ac.uk/images/stories/antiii.jpg"
+      ],
+      "headings": [
+        {
+          "id": "a-brief-introdcution-of-ambient-noise-cross-correlation",
+          "text": "A Brief Introdcution of Ambient Noise Cross-correlation"
+        },
+        {
+          "id": "what-is-ambient-noise",
+          "text": "1.1 What is Ambient Noise?"
+        },
+        {
+          "id": "ambient-noise-cross-correlation-1",
+          "text": "1.2 Ambient noise cross correlation"
+        },
+        {
+          "id": "workflow",
+          "text": "1.3 Workflow:"
+        },
+        {
+          "id": "data-preparation-and-inital-processing",
+          "text": "1.4 Data Preparation and inital processing"
+        },
+        {
+          "id": "tutorial",
+          "text": "Tutorial"
+        },
+        {
+          "id": "import-useful-packages-from-python-library",
+          "text": "2.1 Import useful packages from Python library"
+        },
+        {
+          "id": "stations-information",
+          "text": "2.2 Stations information"
+        },
+        {
+          "id": "bandpass-filter",
+          "text": "2.3 Bandpass filter"
+        },
+        {
+          "id": "plot-the-waveoforms",
+          "text": "2.4 Plot the waveoforms"
+        },
+        {
+          "id": "down-sampling-data",
+          "text": "2.5 Down-sampling Data"
+        },
+        {
+          "id": "one-bit-normalization",
+          "text": "2.6 One-bit Normalization"
+        },
+        {
+          "id": "conduct-cross-correlation",
+          "text": "2.7 Conduct Cross-Correlation"
+        },
+        {
+          "id": "plot-results",
+          "text": "2.8 Plot Results"
+        },
+        {
+          "id": "references",
+          "text": "2.5 References:"
+        }
+      ]
+    },
+    {
+      "source": "appendix/index.rst",
+      "target": "src/content/docs/appendix/index.mdx",
+      "slug": "appendix",
+      "title": "Acknowledgement",
+      "counts": {},
+      "expected_counts": {
+        "code_blocks": 0,
+        "images": 0,
+        "display_math": 0,
+        "admonitions": 0,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": []
+    },
+    {
+      "source": "body_tomo/index.rst",
+      "target": "src/content/docs/body_tomo/index.mdx",
+      "slug": "body_tomo",
+      "title": "Body Wave Tomography",
+      "counts": {
+        "headings": 32,
+        "admonitions": 5,
+        "downloads": 1,
+        "images": 8,
+        "code_blocks": 3
+      },
+      "expected_counts": {
+        "code_blocks": 3,
+        "images": 8,
+        "display_math": 0,
+        "admonitions": 5,
+        "downloads": 1
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Restored a separator before the addEve0.awk explanation."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "the-significance-of-velocity-model-in-seismology",
+          "text": "The significance of velocity model in seismology"
+        },
+        {
+          "id": "brief-introduction-of-the-tomography-inversion-method-tomodd",
+          "text": "Brief introduction of the tomography inversion method-TomoDD"
+        },
+        {
+          "id": "an-introduction-to-the-use-of-tomodd-software",
+          "text": "An introduction to the use of TomoDD software"
+        },
+        {
+          "id": "preparation-of-input-data",
+          "text": "1 preparation of input data"
+        },
+        {
+          "id": "prepare-the-seismic-phase-file-phase.dat-and-station-file-station.dat",
+          "text": "1.1 Prepare the seismic phase file (phase.dat) and station file (station.dat)"
+        },
+        {
+          "id": "seismic-phase-file-the-format-of-this-file-is-shown-below-as-shown-in-exampleph2dt",
+          "text": "1.1.1 Seismic phase file: the format of this file is shown below (as shown in Example/ph2dt)"
+        },
+        {
+          "id": "seismic-phase-file-the-format-of-this-file-is-shown-below-as-shown-in-exampleph2dt-1",
+          "text": "1.1.2 Seismic phase file: the format of this file is shown below (as shown in Example/ph2dt)"
+        },
+        {
+          "id": "calculating-absolute-arrival-times-absolute.dat-differential-arrival-times-of-event-pair-dt.ct-and-event-information-event.dat.",
+          "text": "1.2 Calculating absolute arrival times (absolute.dat), differential arrival times of event pair (dt.ct) and event information (event.dat)."
+        },
+        {
+          "id": "compile-program-input-ph2dt.inc-output-ph2dtn3",
+          "text": "1.2.1 Compile program (input: ph2dt.inc; output: ph2dtN3)"
+        },
+        {
+          "id": "execute-the-generated-compiler-to-calculate-differential-times-input-ph2dt.inp-output-absolute.dat-dt.ct-event.dat",
+          "text": "1.2.2 Execute the generated compiler to calculate differential times (input: ph2dt.inp; output: absolute.dat, dt.ct, event.dat)"
+        },
+        {
+          "id": "convert-the-resulting-event.dat-file-to-the-data-format-required-by-tomodd-as-shown-below",
+          "text": "1.2.3 Convert the resulting event.dat file to the data format required by TomoDD, as shown below"
+        },
+        {
+          "id": "inversion-example",
+          "text": "2 Inversion example"
+        },
+        {
+          "id": "preparation-of-the-initial-velocity-model",
+          "text": "2.1 Preparation of the initial velocity model"
+        },
+        {
+          "id": "the-initial-velocity-model-may-be-given-a-transversely-homogeneous-gradient-model-increasing-by-depth.",
+          "text": "1 The initial velocity model may be given a transversely homogeneous gradient model increasing by depth."
+        },
+        {
+          "id": "in-addition-the-initial-velocity-model-can-also-be-obtained-by-using-the-velest-kissling-et-al.-1994-program.",
+          "text": "2 In addition, the initial velocity model can also be obtained by using the VELEST (Kissling et al., 1994) program."
+        },
+        {
+          "id": "tomodd-source-code-compilation-tomodd-se",
+          "text": "2.2 TomoDD source code compilation: tomoDD-SE"
+        },
+        {
+          "id": "allocate-the-memory-required-by-the-program-by-modifying-the-following-parameter-file",
+          "text": "2.2.1 Allocate the memory required by the program by modifying the following parameter file"
+        },
+        {
+          "id": "compile-program",
+          "text": "2.2.2 Compile program"
+        },
+        {
+          "id": "preparation-of-parameter-file-tomodd-se.inp",
+          "text": "2.3 Preparation of parameter file: tomoDD-SE.inp"
+        },
+        {
+          "id": "prepare-the-folder-for-input-data-input_files",
+          "text": "2.4 Prepare the folder for input data: Input_Files"
+        },
+        {
+          "id": "prepare-the-folder-for-output-data-output_files",
+          "text": "2.5 Prepare the folder for output data: Output_Files"
+        },
+        {
+          "id": "perform-inversion",
+          "text": "2.6 Perform inversion"
+        },
+        {
+          "id": "display-of-inversion-results",
+          "text": "2.7 Display of inversion results"
+        },
+        {
+          "id": "data-residuals",
+          "text": "2.8 Data residuals"
+        },
+        {
+          "id": "resolution-test-of-inversion-results",
+          "text": "3 Resolution test of inversion results"
+        },
+        {
+          "id": "ray-distribution-density",
+          "text": "3.1 Ray distribution density"
+        },
+        {
+          "id": "synthetic-resolution-test-checkboard-test",
+          "text": "3.2 Synthetic resolution test (checkboard test)"
+        },
+        {
+          "id": "forward-modeling-and-inversion-code-compilation",
+          "text": "3.2.1 Forward modeling and inversion code compilation"
+        },
+        {
+          "id": "generate-synthetic-data",
+          "text": "3.2.2 Generate synthetic data"
+        },
+        {
+          "id": "inversion-velocity-model",
+          "text": "3.2.3 Inversion velocity model"
+        },
+        {
+          "id": "display-of-inversion-results-1",
+          "text": "3.2.4 Display of inversion results"
+        },
+        {
+          "id": "reference",
+          "text": "Reference:"
+        }
+      ]
+    },
+    {
+      "source": "dd_loc/index.rst",
+      "target": "src/content/docs/dd_loc/index.mdx",
+      "slug": "dd_loc",
+      "title": "Double-Difference Earthquake Relocation",
+      "counts": {
+        "headings": 31,
+        "images": 13,
+        "admonitions": 7,
+        "code_blocks": 58,
+        "inline_math": 32,
+        "display_math": 31,
+        "links": 2,
+        "downloads": 1
+      },
+      "expected_counts": {
+        "code_blocks": 58,
+        "images": 13,
+        "display_math": 31,
+        "admonitions": 7,
+        "downloads": 1
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Converted three embedded Markdown heading/hint markers to RST structure."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "introduction",
+          "text": "Introduction"
+        },
+        {
+          "id": "contents-of-this-tutorial",
+          "text": "Contents of this tutorial"
+        },
+        {
+          "id": "initiation",
+          "text": "Initiation"
+        },
+        {
+          "id": "preparation-for-environment",
+          "text": "Preparation for Environment"
+        },
+        {
+          "id": "basic-parameters",
+          "text": "Basic parameters"
+        },
+        {
+          "id": "absolute-earthquake-location",
+          "text": "Absolute earthquake location"
+        },
+        {
+          "id": "initial-location",
+          "text": "Initial location"
+        },
+        {
+          "id": "velocity-error",
+          "text": "Velocity Error"
+        },
+        {
+          "id": "station-delay",
+          "text": "Station Delay"
+        },
+        {
+          "id": "conduct-inversion-with-delayed-data",
+          "text": "Conduct inversion with delayed data"
+        },
+        {
+          "id": "the-second-event",
+          "text": "The second event"
+        },
+        {
+          "id": "add-picking-noise",
+          "text": "Add Picking Noise"
+        },
+        {
+          "id": "double-difference-method",
+          "text": "Double Difference Method"
+        },
+        {
+          "id": "make-difference",
+          "text": "Make difference"
+        },
+        {
+          "id": "observed-travel-time-difference",
+          "text": "1. Observed Travel Time Difference"
+        },
+        {
+          "id": "calculated-travel-time-difference",
+          "text": "2. Calculated Travel Time Difference"
+        },
+        {
+          "id": "calculate-double-difference",
+          "text": "3. Calculate Double-Difference"
+        },
+        {
+          "id": "build-up-data-kernel---g",
+          "text": "4. Build Up Data Kernel - G"
+        },
+        {
+          "id": "check-gtg-inverse-exists",
+          "text": "5. Check GTG Inverse Exists"
+        },
+        {
+          "id": "add-damp-to-matrix",
+          "text": "6. Add Damp to Matrix"
+        },
+        {
+          "id": "damping-the-kernel",
+          "text": "Damping the kernel"
+        },
+        {
+          "id": "mathematical-meaning",
+          "text": "Mathematical Meaning"
+        },
+        {
+          "id": "solve-damped-problem",
+          "text": "7. Solve Damped Problem"
+        },
+        {
+          "id": "update-location",
+          "text": "8. Update Location"
+        },
+        {
+          "id": "error-analysis",
+          "text": "9. Error analysis"
+        },
+        {
+          "id": "condition-number",
+          "text": "10. Condition Number"
+        },
+        {
+          "id": "iterative-double-difference-method",
+          "text": "Iterative Double-Difference Method"
+        },
+        {
+          "id": "lsqr-algorithm",
+          "text": "LSQR Algorithm"
+        },
+        {
+          "id": "summary",
+          "text": "Summary"
+        },
+        {
+          "id": "homework",
+          "text": "Homework"
+        },
+        {
+          "id": "source-code",
+          "text": "Source code"
+        }
+      ]
+    },
+    {
+      "source": "eqt/index.rst",
+      "target": "src/content/docs/eqt/index.mdx",
+      "slug": "eqt",
+      "title": "Earthquake Transformer Tutorial",
+      "counts": {
+        "headings": 12,
+        "links": 2,
+        "admonitions": 8,
+        "code_blocks": 9,
+        "downloads": 6,
+        "images": 2
+      },
+      "expected_counts": {
+        "code_blocks": 9,
+        "images": 2,
+        "display_math": 0,
+        "admonitions": 8,
+        "downloads": 6
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "deep-learning-model-for-automatic-detection",
+          "text": "Deep learning model for automatic detection"
+        },
+        {
+          "id": "what-is-earthquake-transformer-eqt",
+          "text": "What is Earthquake Transformer (EQT)"
+        },
+        {
+          "id": "how-to-install-eqt",
+          "text": "How to install EQT"
+        },
+        {
+          "id": "contents-of-this-tutorial",
+          "text": "Contents of this tutorial"
+        },
+        {
+          "id": "make-the-station-list-and-download-the-data",
+          "text": "1 Make the station list and Download the data"
+        },
+        {
+          "id": "constrain-the-area-and-the-time-of-interest",
+          "text": "1.1 Constrain the area and the time of interest"
+        },
+        {
+          "id": "make-station-list",
+          "text": "1.2 Make Station list"
+        },
+        {
+          "id": "download-data",
+          "text": "1.3 Download Data"
+        },
+        {
+          "id": "detect-earthquake",
+          "text": "2 Detect Earthquake"
+        },
+        {
+          "id": "visualise-the-results",
+          "text": "3 Visualise the results"
+        },
+        {
+          "id": "phase-association",
+          "text": "4 Phase association"
+        }
+      ]
+    },
+    {
+      "source": "fk/index.rst",
+      "target": "src/content/docs/fk/index.mdx",
+      "slug": "fk",
+      "title": "FK & CAP Installation Guide",
+      "counts": {
+        "links": 17,
+        "headings": 5,
+        "code_blocks": 25,
+        "downloads": 3,
+        "inline_math": 15,
+        "display_math": 1
+      },
+      "expected_counts": {
+        "code_blocks": 25,
+        "images": 0,
+        "display_math": 1,
+        "admonitions": 0,
+        "downloads": 3
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Extended short heading adornments for '1. Package required'.",
+        "Extended short heading adornments for '3. Run an example'.",
+        "Extended short heading adornments for '4. Optional: Install pyfk'."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "package-required",
+          "text": "1. Package required"
+        },
+        {
+          "id": "installation",
+          "text": "2. Installation"
+        },
+        {
+          "id": "run-an-example",
+          "text": "3. Run an example"
+        },
+        {
+          "id": "optional-install-pyfk",
+          "text": "4. Optional: Install pyfk"
+        },
+        {
+          "id": "exercises",
+          "text": "5. Exercises"
+        }
+      ]
+    },
+    {
+      "source": "gcap/index.rst",
+      "target": "src/content/docs/gcap/index.mdx",
+      "slug": "gcap",
+      "title": "Focal mechanism",
+      "counts": {
+        "headings": 16,
+        "images": 5,
+        "links": 8,
+        "code_blocks": 30,
+        "downloads": 4,
+        "admonitions": 5
+      },
+      "expected_counts": {
+        "code_blocks": 30,
+        "images": 5,
+        "display_math": 0,
+        "admonitions": 5,
+        "downloads": 4
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Normalized directive capitalization/spacing (including code ::)."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "introduction",
+          "text": "1 Introduction"
+        },
+        {
+          "id": "what-is-focal-mechanism",
+          "text": "1.1 What is focal mechanism"
+        },
+        {
+          "id": "package-required",
+          "text": "1.2 package required"
+        },
+        {
+          "id": "installation",
+          "text": "2 Installation"
+        },
+        {
+          "id": "fk",
+          "text": "2.1 fk"
+        },
+        {
+          "id": "seismic-analysis-code-sac",
+          "text": "2.2 Seismic Analysis Code (SAC)"
+        },
+        {
+          "id": "apply-sac-source-file",
+          "text": "Apply SAC source file"
+        },
+        {
+          "id": "installation-for-linux",
+          "text": "2.2.1 Installation for linux"
+        },
+        {
+          "id": "installation-for-macos",
+          "text": "2.2.2 Installation for MacOS"
+        },
+        {
+          "id": "gcap3d",
+          "text": "2.3 gCAP3D"
+        },
+        {
+          "id": "data-processing",
+          "text": "3 Data processing"
+        },
+        {
+          "id": "greens-function-calculation",
+          "text": "3.1 Green's function calculation"
+        },
+        {
+          "id": "sac-file-preparation",
+          "text": "3.2 Sac file preparation"
+        },
+        {
+          "id": "focal-mechanism-inversion",
+          "text": "3.3 Focal mechanism inversion"
+        },
+        {
+          "id": "uncertainty-analysis",
+          "text": "3.3 Uncertainty analysis"
+        },
+        {
+          "id": "references",
+          "text": "References"
+        }
+      ]
+    },
+    {
+      "source": "intro/git-update.rst",
+      "target": "src/content/docs/intro/git-update.mdx",
+      "slug": "intro/git-update",
+      "title": "How to contribute",
+      "counts": {
+        "links": 2,
+        "images": 1
+      },
+      "expected_counts": {
+        "code_blocks": 0,
+        "images": 1,
+        "display_math": 0,
+        "admonitions": 0,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": []
+    },
+    {
+      "source": "intro/index.rst",
+      "target": "src/content/docs/intro/index.mdx",
+      "slug": "intro",
+      "title": "Introduction",
+      "counts": {},
+      "expected_counts": {
+        "code_blocks": 0,
+        "images": 0,
+        "display_math": 0,
+        "admonitions": 0,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": []
+    },
+    {
+      "source": "obspy-1/index.rst",
+      "target": "src/content/docs/obspy-1/index.mdx",
+      "slug": "obspy-1",
+      "title": "Seismic data request via ObsPy",
+      "counts": {
+        "headings": 19,
+        "images": 7,
+        "links": 3,
+        "admonitions": 11,
+        "code_blocks": 18,
+        "tables": 1
+      },
+      "expected_counts": {
+        "code_blocks": 18,
+        "images": 7,
+        "display_math": 0,
+        "admonitions": 11,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Normalized directive capitalization/spacing (including code ::).",
+        "Preserved pipe-delimited station metadata as literal text."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "what-is-obspy",
+          "text": "What is ObsPy?"
+        },
+        {
+          "id": "how-to-install-obspy",
+          "text": "How to install ObsPy"
+        },
+        {
+          "id": "contents-of-this-tutorial",
+          "text": "Contents of this tutorial"
+        },
+        {
+          "id": "utc-date-time",
+          "text": "1 UTC Date Time"
+        },
+        {
+          "id": "datetime-initialization",
+          "text": "1.1 DateTime Initialization"
+        },
+        {
+          "id": "datetime-attribute-access",
+          "text": "1.2 DateTime Attribute Access"
+        },
+        {
+          "id": "handling-time-differences",
+          "text": "1.3 Handling time differences"
+        },
+        {
+          "id": "seismic-data-acquisition-and-visualization",
+          "text": "2 Seismic data acquisition and visualization"
+        },
+        {
+          "id": "flow-chart",
+          "text": "Flow chart"
+        },
+        {
+          "id": "choose-an-event",
+          "text": "2.1 Choose an event"
+        },
+        {
+          "id": "choose-a-station",
+          "text": "2.2 Choose a station"
+        },
+        {
+          "id": "get-waveforms",
+          "text": "2.3 Get waveforms"
+        },
+        {
+          "id": "meta-data",
+          "text": "2.4 Meta data"
+        },
+        {
+          "id": "plot-the-waveforms",
+          "text": "2.5 Plot the waveforms"
+        },
+        {
+          "id": "waveform-cross-section-plot",
+          "text": "2.6 Waveform Cross-section Plot"
+        },
+        {
+          "id": "get-the-waveform-data-with-more-than-1-station",
+          "text": "2.6.1 Get the waveform data with more than 1 station"
+        },
+        {
+          "id": "calculate-the-great-circle-distance-from-stations-to-earthquake",
+          "text": "2.6.2 Calculate the great circle distance from stations to earthquake"
+        },
+        {
+          "id": "plot-the-waveform-cross-section-plot",
+          "text": "2.6.3 Plot the waveform cross-section plot"
+        }
+      ]
+    },
+    {
+      "source": "obspy-2/index.rst",
+      "target": "src/content/docs/obspy-2/index.mdx",
+      "slug": "obspy-2",
+      "title": "Seismic data process via ObsPy",
+      "counts": {
+        "headings": 19,
+        "downloads": 5,
+        "code_blocks": 16,
+        "admonitions": 4,
+        "images": 15
+      },
+      "expected_counts": {
+        "code_blocks": 16,
+        "images": 15,
+        "display_math": 0,
+        "admonitions": 4,
+        "downloads": 5
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "basic-seismic-data-processing",
+          "text": "1 Basic Seismic Data Processing"
+        },
+        {
+          "id": "detrend-filter-data",
+          "text": "1.1 Detrend / Filter Data"
+        },
+        {
+          "id": "filter-data",
+          "text": "1.2 Filter Data"
+        },
+        {
+          "id": "waveform-rotation",
+          "text": "1.3 Waveform rotation"
+        },
+        {
+          "id": "seismic-phases-in-seismogram",
+          "text": "1.4 Seismic Phases in seismogram"
+        },
+        {
+          "id": "taup",
+          "text": "2 TauP"
+        },
+        {
+          "id": "source-configuration",
+          "text": "2.1 Source Configuration"
+        },
+        {
+          "id": "receiver-configuration",
+          "text": "2.2 Receiver Configuration"
+        },
+        {
+          "id": "travel-time-calculation",
+          "text": "2.3 Travel Time Calculation"
+        },
+        {
+          "id": "method-1",
+          "text": "Method 1"
+        },
+        {
+          "id": "method-2",
+          "text": "Method 2"
+        },
+        {
+          "id": "visualise-the-result",
+          "text": "2.4 Visualise the result"
+        },
+        {
+          "id": "section-plot",
+          "text": "3 Section Plot"
+        },
+        {
+          "id": "waveform-cross-section-plot",
+          "text": "3.1 Waveform cross-section plot"
+        },
+        {
+          "id": "taup-travel-time",
+          "text": "3.2 TauP travel time"
+        },
+        {
+          "id": "output-the-taup-result-as-text-file-for-further-processing",
+          "text": "3.3 Output the TauP result as text file for further processing"
+        },
+        {
+          "id": "trim-and-filter-data",
+          "text": "3.4 Trim and filter data"
+        },
+        {
+          "id": "add-more-components-on-your-plot",
+          "text": "3.5 Add more components on your plot"
+        },
+        {
+          "id": "exercises",
+          "text": "4 Exercises"
+        }
+      ]
+    },
+    {
+      "source": "pylith_dynamic/index.rst",
+      "target": "src/content/docs/pylith_dynamic/index.mdx",
+      "slug": "pylith_dynamic",
+      "title": "Dynamic Rupture Simulation",
+      "counts": {
+        "headings": 8,
+        "images": 7,
+        "admonitions": 2,
+        "links": 4,
+        "downloads": 4,
+        "code_blocks": 7
+      },
+      "expected_counts": {
+        "code_blocks": 7,
+        "images": 7,
+        "display_math": 0,
+        "admonitions": 2,
+        "downloads": 4
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "aim-of-this-module",
+          "text": "Aim of this module"
+        },
+        {
+          "id": "simple-3d-case-study---nepal",
+          "text": "Simple 3D case study - Nepal"
+        },
+        {
+          "id": "basic-structure-of-a-configuration-.cfg-file",
+          "text": "Basic structure of a configuration (.cfg) file"
+        },
+        {
+          "id": "basic-structure-of-a-spatial-database-.spatialdb-file",
+          "text": "Basic structure of a spatial database (.spatialdb) file"
+        },
+        {
+          "id": "running-the-dynamic-simulation",
+          "text": "Running the dynamic simulation"
+        },
+        {
+          "id": "visualizing-results",
+          "text": "Visualizing results"
+        },
+        {
+          "id": "how-to-install-h5py",
+          "text": "How to install h5py"
+        }
+      ]
+    },
+    {
+      "source": "pylith_static/index.rst",
+      "target": "src/content/docs/pylith_static/index.mdx",
+      "slug": "pylith_static",
+      "title": "Static Stress Change - PyLith",
+      "counts": {
+        "headings": 10,
+        "images": 3,
+        "links": 2,
+        "admonitions": 2,
+        "code_blocks": 9,
+        "downloads": 3
+      },
+      "expected_counts": {
+        "code_blocks": 9,
+        "images": 3,
+        "display_math": 0,
+        "admonitions": 2,
+        "downloads": 3
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief introduction"
+        },
+        {
+          "id": "what-is-pylith",
+          "text": "What is PyLith?"
+        },
+        {
+          "id": "aim-of-this-module",
+          "text": "Aim of this module"
+        },
+        {
+          "id": "how-to-install-pylith",
+          "text": "How to install PyLith?"
+        },
+        {
+          "id": "simple-3d-case-study---nepal",
+          "text": "Simple 3D case study - Nepal"
+        },
+        {
+          "id": "basic-structure-of-a-configuration-.cfg-file",
+          "text": "Basic structure of a configuration (.cfg) file"
+        },
+        {
+          "id": "basic-structure-of-a-spatial-database-.spatialdb-file",
+          "text": "Basic structure of a spatial database (.spatialdb) file"
+        },
+        {
+          "id": "running-the-static-simulation",
+          "text": "Running the static simulation"
+        },
+        {
+          "id": "visualizing-results",
+          "text": "Visualizing results"
+        },
+        {
+          "id": "how-to-install-h5py",
+          "text": "How to install h5py"
+        }
+      ]
+    },
+    {
+      "source": "source_spectra/index.rst",
+      "target": "src/content/docs/source_spectra/index.mdx",
+      "slug": "source_spectra",
+      "title": "Spectral Analysis",
+      "counts": {
+        "headings": 13,
+        "images": 10,
+        "downloads": 1,
+        "admonitions": 5,
+        "code_blocks": 5
+      },
+      "expected_counts": {
+        "code_blocks": 5,
+        "images": 10,
+        "display_math": 0,
+        "admonitions": 5,
+        "downloads": 1
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Normalized directive capitalization/spacing (including code ::)."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "introduction",
+          "text": "Introduction"
+        },
+        {
+          "id": "what-is-earthquake-stress-drop",
+          "text": "What is earthquake stress drop?"
+        },
+        {
+          "id": "stress-drop-in-a-circular-fault",
+          "text": "Stress drop in a circular fault"
+        },
+        {
+          "id": "what-is-earthquake-spectrum",
+          "text": "What is earthquake spectrum?"
+        },
+        {
+          "id": "brunes-model-for-far-field-spectrum",
+          "text": "Brune's model for far-field spectrum"
+        },
+        {
+          "id": "path-and-free-surface-effects",
+          "text": "Path and free surface effects"
+        },
+        {
+          "id": "example-the-2017-11-12-iran-m7.3-earthquake",
+          "text": "Example: the 2017-11-12 Iran M7.3 earthquake"
+        },
+        {
+          "id": "download-the-waveforms-and-preprocessing",
+          "text": "Download the waveforms and pre=processing"
+        },
+        {
+          "id": "calculate-spectra",
+          "text": "Calculate spectra"
+        },
+        {
+          "id": "correction-for-spreading-term-and-radiation-pattern",
+          "text": "Correction for spreading term and radiation pattern"
+        },
+        {
+          "id": "correction-for-attenuation",
+          "text": "Correction for attenuation"
+        },
+        {
+          "id": "correction-for-the-depth-phases",
+          "text": "Correction for the depth phases"
+        },
+        {
+          "id": "estimating-the-moment-and-stress-drop",
+          "text": "Estimating the moment and stress drop"
+        }
+      ]
+    },
+    {
+      "source": "sta_lta/index.rst",
+      "target": "src/content/docs/sta_lta/index.mdx",
+      "slug": "sta_lta",
+      "title": "Earthquake Detection STA/LTA",
+      "counts": {
+        "headings": 26,
+        "images": 21,
+        "admonitions": 1,
+        "code_blocks": 18
+      },
+      "expected_counts": {
+        "code_blocks": 18,
+        "images": 21,
+        "display_math": 0,
+        "admonitions": 1,
+        "downloads": 0
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "brief-introduction",
+          "text": "Brief Introduction"
+        },
+        {
+          "id": "why-do-we-use-stalta",
+          "text": "Why do we use STA/LTA?"
+        },
+        {
+          "id": "how-does-stalta-works",
+          "text": "How does STA/LTA works?"
+        },
+        {
+          "id": "aim-of-this-module",
+          "text": "Aim of this Module"
+        },
+        {
+          "id": "activate-obspy-environment",
+          "text": "Activate ObsPy environment"
+        },
+        {
+          "id": "import-necessary-packages",
+          "text": "Import necessary packages"
+        },
+        {
+          "id": "choose-an-event-and-read-the-waveform-data",
+          "text": "1 Choose an Event and Read the Waveform Data"
+        },
+        {
+          "id": "choose-an-event",
+          "text": "1.1 Choose an event"
+        },
+        {
+          "id": "choose-a-station-and-get-the-waveform",
+          "text": "1.2 Choose a station and get the waveform"
+        },
+        {
+          "id": "filter-data",
+          "text": "1.3 Filter Data"
+        },
+        {
+          "id": "triggering-example",
+          "text": "1.4 Triggering Example"
+        },
+        {
+          "id": "how-to-adjust-stalta-trigger-parameters",
+          "text": "2 How to adjust STA/LTA trigger parameters"
+        },
+        {
+          "id": "selection-of-short-time-average-window-sta-duration",
+          "text": "2.1 Selection of short-time average window (STA) duration"
+        },
+        {
+          "id": "selection-of-long-time-average-window-lta-duration",
+          "text": "2.2 Selection of long-time average window (LTA) duration"
+        },
+        {
+          "id": "selection-of-stalta-trigger-threshold-level",
+          "text": "2.3 Selection of STA/LTA trigger threshold level"
+        },
+        {
+          "id": "selection-of-stalta-detrigger-threshold-level",
+          "text": "2.4 Selection of STA/LTA detrigger threshold level"
+        },
+        {
+          "id": "available-stalta-methods",
+          "text": "3 Available STA/LTA Methods"
+        },
+        {
+          "id": "classic-sta-lta",
+          "text": "3.1 Classic Sta Lta"
+        },
+        {
+          "id": "recursive-sta-lta",
+          "text": "3.2 Recursive Sta Lta"
+        },
+        {
+          "id": "carl-sta_trig",
+          "text": "3.3 Carl-Sta_Trig"
+        },
+        {
+          "id": "delayed-sta-lta",
+          "text": "3.4 Delayed Sta Lta"
+        },
+        {
+          "id": "z-detect",
+          "text": "3.5 Z-Detect"
+        },
+        {
+          "id": "detect-events-on-multiple-traces-by-using-stalta",
+          "text": "4 Detect events on multiple traces by using STA/LTA"
+        },
+        {
+          "id": "get-the-waveform-data-with-more-than-1-station",
+          "text": "4.1 Get the waveform data with more than 1 station"
+        },
+        {
+          "id": "filter-the-data",
+          "text": "4.2 Filter the data"
+        },
+        {
+          "id": "using-stalta-to-detect-events",
+          "text": "4.2 Using STA/LTA to detect events"
+        }
+      ]
+    },
+    {
+      "source": "surface_tomo/index.rst",
+      "target": "src/content/docs/surface_tomo/index.mdx",
+      "slug": "surface_tomo",
+      "title": "Surface Wave Tomography",
+      "counts": {
+        "headings": 6,
+        "images": 8,
+        "downloads": 1,
+        "code_blocks": 11,
+        "admonitions": 2,
+        "tables": 1,
+        "links": 1
+      },
+      "expected_counts": {
+        "code_blocks": 11,
+        "images": 8,
+        "display_math": 0,
+        "admonitions": 2,
+        "downloads": 1
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Rayleigh_wave.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Love_wave.svg/1920px-Love_wave.svg.png"
+      ],
+      "headings": [
+        {
+          "id": "introduction-to-surface-waves",
+          "text": "Introduction to surface waves"
+        },
+        {
+          "id": "surface-waves-observations",
+          "text": "Surface waves observations"
+        },
+        {
+          "id": "phase-shift-of-rayleigh-waves",
+          "text": "Phase shift of Rayleigh waves"
+        },
+        {
+          "id": "dispersion-of-surface-waves",
+          "text": "Dispersion of surface waves"
+        },
+        {
+          "id": "compute-theoretical-dispersion-curve",
+          "text": "Compute theoretical dispersion curve"
+        },
+        {
+          "id": "invert-observed-dispersion-curve-for-1d-velocity",
+          "text": "Invert observed dispersion curve for 1D velocity"
+        }
+      ]
+    },
+    {
+      "source": "unix/index.rst",
+      "target": "src/content/docs/unix/index.mdx",
+      "slug": "unix",
+      "title": "Unix commands",
+      "counts": {
+        "headings": 11,
+        "code_blocks": 18,
+        "admonitions": 7,
+        "downloads": 1
+      },
+      "expected_counts": {
+        "code_blocks": 18,
+        "images": 0,
+        "display_math": 0,
+        "admonitions": 7,
+        "downloads": 1
+      },
+      "repairs": [
+        "Normalized whitespace-only lines before parsing to preserve code bodies.",
+        "Normalized directive capitalization/spacing (including code ::).",
+        "Extended short heading adornments for '3.1 Directory management'."
+      ],
+      "parser_warnings": "",
+      "missing_assets": [],
+      "external_images": [],
+      "headings": [
+        {
+          "id": "target",
+          "text": "1 Target"
+        },
+        {
+          "id": "commands-and-concept-included",
+          "text": "2 Commands and concept included"
+        },
+        {
+          "id": "commands-usage-and-examples",
+          "text": "3 Commands usage and examples"
+        },
+        {
+          "id": "directory-management",
+          "text": "3.1 Directory management"
+        },
+        {
+          "id": "file-reading",
+          "text": "3.2 File reading"
+        },
+        {
+          "id": "browse-documents",
+          "text": "3.2.1 Browse documents"
+        },
+        {
+          "id": "extract-the-text-content",
+          "text": "3.2.1 Extract the text content"
+        },
+        {
+          "id": "file-output-and-input",
+          "text": "3.3 File output and input"
+        },
+        {
+          "id": "the-pipe-in-unix",
+          "text": "3.4 The Pipe in Unix"
+        },
+        {
+          "id": "exercise",
+          "text": "4 Exercise"
+        },
+        {
+          "id": "references",
+          "text": "References"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "headings": 293,
+    "links": 75,
+    "images": 157,
+    "admonitions": 79,
+    "code_blocks": 295,
+    "downloads": 50,
+    "display_math": 58,
+    "inline_math": 116,
+    "tables": 2,
+    "pages": 21
+  },
+  "post_migration_adjustments": [
+    {
+      "page": "intro/git-update",
+      "change": "Added a note distinguishing the historical Read the Docs workflow from the current MDX editing workflow."
+    },
+    {
+      "page": "ambient_tomo",
+      "change": "Replaced two unreachable external image elements with availability notices, preserving original captions and source links. The original conversion counts above include these two images.",
+      "reason": "volc_seis_commission.leeds.ac.uk did not resolve over either HTTP or HTTPS.",
+      "urls": [
+        "http://volc_seis_commission.leeds.ac.uk/images/stories/crossc.jpg",
+        "http://volc_seis_commission.leeds.ac.uk/images/stories/antiii.jpg"
+      ]
+    }
+  ]
+}

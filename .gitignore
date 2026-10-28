@@ -1,0 +1,48 @@
+# JavaScript dependencies and package-manager caches
+node_modules/
+/.npm/
+/.pnpm-store/
+
+# Astro build output and generated types/cache
+/dist/
+/.astro/
+/.cache/
+*.tsbuildinfo
+
+# Local environment settings (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+
+# Local Vercel project state
+/.vercel/
+
+# Package-manager diagnostics
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python migration tools and notebook caches
+/.venv/
+/venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Local editor and operating-system files
+/.idea/
+/*.code-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Keep package-lock.json, .nvmrc, .github/, source MDX, migration reports,
+# and all teaching assets in public/media/ (including archives and notebooks).
