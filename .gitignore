@@ -2,6 +2,8 @@
 node_modules/
 /.npm/
 /.pnpm-store/
+# This project uses npm; keep only package-lock.json
+pnpm-lock.yaml
 
 # Astro build output and generated types/cache
 /dist/
