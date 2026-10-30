@@ -1,0 +1,40 @@
+---
+title: "Apollo lunar seismology"
+slug: lunar-seismic
+---
+
+## Analyze Apollo seismic waveforms
+
+This tutorial uses three-component deep-moonquake stacks from the [Nunn et al. lunar seismology archive](https://doi.org/10.5281/zenodo.7787610). You will read and align Apollo 12 waveforms, apply a simple polarization weight, and compare them with a single raw event fetched from EarthScope.
+
+**Authors:** Kwun Hei Fong and Qili Andy Dai.
+
+- [Download the tutorial PDF](/media/lunar_seismic/Lunar_seismic_Tutorial.pdf)
+- [Download the runnable Python script](/media/lunar_seismic/lunar_seismic_tutorial.py)
+
+### Set up Python
+
+Use Miniconda or Anaconda, then run:
+
+```sh
+conda create -n moon_seismology -c conda-forge python=3.12 obspy numpy scipy matplotlib
+conda activate moon_seismology
+```
+
+### Download the example data
+
+Put the script in a working folder and run these commands from that folder:
+
+```sh
+mkdir -p data
+curl -L --fail 'https://zenodo.org/records/7787610/files/Lognonne_et_al_2003_deep_moonquake_stacks.zip?download=1' -o data/Lognonne_et_al_2003_deep_moonquake_stacks.zip
+unzip -q data/Lognonne_et_al_2003_deep_moonquake_stacks.zip -d data
+curl -L --fail 'https://zenodo.org/records/7787610/files/levent.1008c?download=1' -o data/levent.1008c
+python lunar_seismic_tutorial.py --fetch-raw
+```
+
+The script writes three figures to `figures/`: the stacked three-component record, a comparison of bandpassed and polarization-weighted vertical motion, and a response-corrected raw Apollo 12 event. Omit `--fetch-raw` if you only want the Zenodo stack exercise.
+
+The `MHX` and `MHY` channel names identify horizontal components. They do not, by themselves, establish radial and transverse directions. The polarization weight used here is independent of that rotation; it is an exploratory processing step and does not identify a lunar core phase on its own.
+
+The example was checked against the Zenodo archive and the [EarthScope FDSN services](https://service.earthscope.org/fdsnws/).
