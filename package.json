@@ -11,17 +11,19 @@
     "check": "astro check",
     "verify": "node scripts/verify-build.mjs"
   },
-  "engines": { "node": ">=22.23.4" },
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.0",
     "@astrojs/starlight": "^0.42.7",
     "astro": "^7.4.2",
-    "katex": "^0.16.22",
+    "katex": "^0.19.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   }
 }
