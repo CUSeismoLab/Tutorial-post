@@ -1,0 +1,11 @@
+version: 2
+updates:
+  # Dependabot version updates are disabled on forks by default,
+  # so this only runs on CUSeismoLab/Tutorial-post.
+  - package-ecosystem: npm
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore(deps)"
