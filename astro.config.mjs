@@ -38,11 +38,11 @@ export default defineConfig({
           { label: 'GMT: Seismic data', slug: 'gmt6-2' },
           { label: 'ObsPy: Request data', slug: 'obspy-1' },
           { label: 'ObsPy: Process data', slug: 'obspy-2' },
-          { label: 'Apollo lunar seismology', slug: 'lunar-seismic' },
         ] },
         { label: 'Intermediate level', items: [
           { label: 'STA/LTA earthquake detection', slug: 'sta_lta' },
           { label: 'Absolute earthquake location', slug: 'abs_loc' },
+          { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
         ] },
         { label: 'Advanced level', items: [
           { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
