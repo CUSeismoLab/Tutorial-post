@@ -1,0 +1,482 @@
+---
+title: "Lunar seismic phase picking"
+slug: lunar-phase
+---
+
+This tutorial builds on [Apollo lunar seismic data](/lunar-seismic/). Please complete that section before starting this tutorial.
+
+Kwun Hei Fong & Qili Andy Dai
+
+Contact: qilidai@cuhk.edu.hk
+
+This tutorial uses the three-component A1 deep moonquake stack recorded at Apollo 12 and distributed by Nunn et al. (2020). We compare the direct P and S arrivals before and after polarization filtering, then use TauP and the lunar velocity model of Weber et al. (2011) to predict later arrivals. We align the predictions to a tentative S arrival and overlay them on the waveforms to show where to look for possible deep phases.
+
+[Download the Jupyter notebook](/media/lunar_phase/Lunar_Seismic_Phase_Picking.ipynb).
+
+## 1. Set up the environment
+
+Select your Python kernel (for example, `fk`). If imports fail, run `%pip install "obspy>=1.4.2" numpy scipy matplotlib` in a separate cell and restart the kernel. The notebook uses relative paths and saves figures in `phase_picking_figures/`.
+
+```python
+import sys
+from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
+from obspy import read, Trace
+
+WORK_DIR = Path.cwd()
+FIGURE_DIR = WORK_DIR / "phase_picking_figures"
+FIGURE_DIR.mkdir(exist_ok=True)
+print("Python:", sys.executable)
+print("Working directory:", WORK_DIR)
+print("Imports OK")
+```
+
+## 2. Load and align the Nunn et al. (2020) stack
+
+Use the three cached SAC files if available in the local `data/` directory. Otherwise, download the stack archive and extract only A1/S12/st9. Align the common time interval before working with the three components.
+
+```python
+from urllib.request import urlopen
+from urllib.error import URLError
+from zipfile import ZipFile
+import shutil
+import time as time_module
+
+data_dir = WORK_DIR / "data"
+data_dir.mkdir(parents=True, exist_ok=True)
+base_url = "https://zenodo.org/records/7787610/files/"
+archive_name = "Lognonne_et_al_2003_deep_moonquake_stacks.zip"
+
+def download_once(name):
+    target = data_dir / name
+    if target.is_file() and target.stat().st_size > 0:
+        return target
+    for attempt in range(3):
+        temp = target.with_name(target.name + ".part")
+        try:
+            with urlopen(base_url + name + "?download=1", timeout=60) as source, temp.open("wb") as output:
+                shutil.copyfileobj(source, output)
+            if temp.stat().st_size == 0:
+                raise RuntimeError(f"Empty download: {name}")
+            temp.replace(target)
+            return target
+        except (URLError, OSError, RuntimeError):
+            temp.unlink(missing_ok=True)
+            if attempt == 2:
+                raise
+            time_module.sleep(2)
+
+stack_dir = data_dir / "Lognonne_et_al_2003_deep_moonquake_stacks"
+example_dir = stack_dir / "A1" / "S12" / "st9"
+if not all((example_dir / f"Lognonne_et_al_2003.A1.S12.st9.{ch}").is_file()
+           for ch in ("MHZ", "MHX", "MHY")):
+    with ZipFile(download_once(archive_name)) as archive:
+        members = [name for name in archive.namelist()
+                   if name.startswith("Lognonne_et_al_2003_deep_moonquake_stacks/A1/S12/st9/")
+                   and name.endswith((".MHZ", ".MHX", ".MHY"))]
+        if len(members) != 3:
+            raise RuntimeError(f"Expected three channels in ZIP; found {len(members)}")
+        for name in members:
+            archive.extract(name, data_dir)
+print("Example files:", sorted(x.name for x in example_dir.iterdir()))
+```
+
+```python
+folder = example_dir
+traces = {}
+for channel in ("MHZ", "MHX", "MHY"):
+    path = folder / f"Lognonne_et_al_2003.A1.S12.st9.{channel}"
+    if not path.is_file():
+        raise FileNotFoundError(f"{path} is missing. Run the download cell in Section 2 first.")
+    traces[channel] = read(str(path))[0]
+    tr = traces[channel]
+    print(channel, tr.stats.starttime, tr.stats.endtime,
+          tr.stats.sampling_rate, tr.stats.npts)
+
+
+start = max(tr.stats.starttime for tr in traces.values())
+end = min(tr.stats.endtime for tr in traces.values())
+sr = min(tr.stats.sampling_rate for tr in traces.values())
+assert end > start
+time = np.arange(int((end - start) * sr) + 1) / sr
+components = {}
+for channel, tr in traces.items():
+    native_time = tr.stats.starttime - start + np.arange(tr.stats.npts) / tr.stats.sampling_rate
+    components[channel] = np.interp(time, native_time, tr.data.astype(float))
+print("Common start:", start, "Samples:", len(time), "Rate:", sr)
+```
+
+## 3. Bandpass and rotate into Z/R/T
+
+Apply the 0.05–1.0 Hz bandpass used in the waveform comparison. This example assumes MHX and MHY are south- and west-positive, respectively, using the original tutorial's pairing with Apollo 12 MH1 and MH2. Rotate with the A1–S12 back-azimuth of 224.8°. Check channel orientation and polarity when applying this to another record.
+
+```python
+def bandpass_aligned(data):
+    tr = Trace(np.asarray(data, dtype=float).copy(), header={"sampling_rate": sr})
+    tr.detrend("demean")
+    tr.detrend("linear")
+    tr.filter("bandpass", freqmin=0.05, freqmax=1.0, corners=4, zerophase=True)
+    return tr.data
+
+from obspy.signal.rotate import rotate_ne_rt
+
+z = bandpass_aligned(components["MHZ"])
+x = bandpass_aligned(components["MHX"])
+y = bandpass_aligned(components["MHY"])
+assert len(z) == len(x) == len(y) == len(time)
+
+# Apollo 12: MH1 is south-positive and MH2 west-positive.
+# Following the MHX↔MH1, MHY↔MH2 pairing used in original Step 8:
+
+r, t = rotate_ne_rt(-x, -y, 224.8)
+print(f"A1/S12: {len(time):,} samples at {sr:.4f} Hz")
+print("Z, R, T arrays prepared; inspect archive orientation before physical interpretation.")
+```
+
+## 4. Apply polarization filtering
+
+Seismic arrivals can be difficult to see in the long, scattered lunar coda. Following Weber et al. (2011), Supporting Online Material, equations (1)–(4), we calculate three nonlinear outputs: OZ, OR, and OT.
+
+For the vertical-radial pair, the filter sums the local product Z × R and multiplies the result by Z or R. The transverse output multiplies T by the local sum of T². OZ is useful for examining P-like energy, OR for SV-like energy, and OT for SH-like energy. These are signal types, not automatically identified phase names
+
+```python
+def polarization_filter(z, r, t, sampling_rate, window_seconds=2.0):
+    if not (len(z) == len(r) == len(t)) or sampling_rate <= 0:
+        raise ValueError("Z/R/T must have equal lengths and sampling_rate must be positive.")
+    n = max(1, round((window_seconds * sampling_rate - 1) / 2))
+    w = np.ones(2 * n + 1)
+    M = np.convolve(z * r, w, mode="same")
+
+    OZ = z * M
+    OR = r * M
+    OT = t * np.convolve(t * t, w, mode="same")
+    return OZ, OR, OT, n
+
+OZ, OR, OT, n = polarization_filter(z, r, t, sr)
+print(f"Filter window: {2*n+1} samples ({(2*n+1)/sr:.2f} s)")
+print("OZ, OR, OT calculated.")
+```
+
+## 5. Compare waveforms before and after filtering
+
+The left panels show the bandpassed stacked waveforms; the right panels show their polarization-filtered versions. We compare Z/OZ, R/OR, and T/OT on the same time axis. Each waveform is normalized separately by its maximum absolute value so its shape is visible; do not interpret a larger-looking peak as a physical amplification factor.
+
+```python
+def peak_normalize(a):
+    scale = np.max(np.abs(a))
+    return a / scale if scale > 0 else np.zeros_like(a)
+
+pairs = [(z, OZ, "Z", "OZ"), (r, OR, "R", "OR"), (t, OT, "T", "OT")]
+fig, axes = plt.subplots(3, 2, figsize=(12, 8), sharex=True)
+for i, (raw, filtered, name_raw, name_filt) in enumerate(pairs):
+    axes[i, 0].plot(time, peak_normalize(raw), lw=0.6)
+    axes[i, 1].plot(time, peak_normalize(filtered), lw=0.6)
+    for j, name in enumerate((name_raw, name_filt)):
+        axes[i, j].set_title(f"{name}: {'bandpassed stack' if j == 0 else 'polarization filtered'}")
+        axes[i, j].set_ylabel("Individually normalized")
+        axes[i, j].grid(alpha=0.2)
+axes[-1, 0].set_xlabel("Time from common start (s)")
+axes[-1, 1].set_xlabel("Time from common start (s)")
+fig.tight_layout()
+fig.savefig(FIGURE_DIR / "step11_before_after.png", dpi=180, bbox_inches="tight")
+plt.show()
+```
+
+![Z, R and T waveforms before and after polarization filtering](/media/lunar_phase/step11_before_after.png)
+
+Start from the broad view in Step 11 and zoom into the relevant interval. The direct P wave often appears earlier and may be easier to examine on Z/OZ. Direct S may be clearer on T/OT
+
+```python
+REVIEW_WINDOW_S = (350, 530)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 6), sharex=True)
+for i, (before, after, phase) in enumerate([
+        (z, OZ, "P-related: Z / OZ"),
+        (t, OT, "S-related: T / OT")]):
+    mask = (time >= REVIEW_WINDOW_S[0]) & (time <= REVIEW_WINDOW_S[1])
+    for j, (signal, label) in enumerate([
+            (before, "Before filtering"), (after, "After filtering")]):
+        axes[i, j].plot(time[mask], peak_normalize(signal[mask]), lw=0.7)
+        axes[i, j].set_title(f"{phase} — {label}")
+        axes[i, j].grid(alpha=0.2)
+        axes[i, j].set_ylabel("Normalized amplitude")
+for ax in axes[-1]:
+    ax.set_xlabel("Time from common start (s)")
+fig.tight_layout()
+fig.savefig(FIGURE_DIR / "step12_pick_guide.png", dpi=180, bbox_inches="tight")
+plt.show()
+```
+
+![P- and S-wave inspection windows](/media/lunar_phase/step12_pick_guide.png)
+
+## 6. Inspect the direct P and S arrivals
+
+The default picks at 390 s and 485 s are provisional. Inspect Z/OZ for P and T/OT for S, then update the picks in the cell below. Use S to align the model times in Step 9.
+
+```python
+P_PICK_S = 390.0
+S_PICK_S = 485.0
+HALF_WIDTH_S = 65.0
+
+picks = [("P", P_PICK_S, z, OZ), ("S", S_PICK_S, t, OT)]
+fig, axes = plt.subplots(2, 2, figsize=(12, 6))
+
+for i, (phase, pick, before, after) in enumerate(picks):
+    for j, (signal, label) in enumerate(((before, "Before"), (after, "After"))):
+        ax = axes[i, j]
+        if pick is None:
+            ax.text(0.5, 0.5, "No reliable pick", transform=ax.transAxes,
+                    ha="center", va="center")
+            continue
+        mask = (time >= pick - HALF_WIDTH_S) & (time <= pick + HALF_WIDTH_S)
+        ax.plot(time[mask], peak_normalize(signal[mask]), lw=0.7)
+        ax.axvline(pick, color="darkorange", ls="--", lw=1)
+        ax.set(title=f"{phase} - {label}", xlabel="Time from common start (s)",
+               ylabel="Locally normalized")
+        ax.grid(alpha=0.2)
+
+fig.tight_layout()
+fig.savefig(FIGURE_DIR / "step12_P_S_closeup.png", dpi=180, bbox_inches="tight")
+plt.show()
+```
+
+![Close-up of the tentative direct P and S arrivals](/media/lunar_phase/step12_P_S_closeup.png)
+
+## 7. Build the lunar velocity model
+
+Before calculating the theoretical travel times, we need a velocity model that describes the Moon's internal structure. Here, we use the one-dimensional lunar velocity model from Weber et al. (2011, Supporting Online Material, Table S2), which provides P-wave velocity, S-wave velocity and density at different depths.
+
+We save these parameters in an .nd file and use ObsPy TauP to build the model. This model will then be used to predict the arrival times of direct P/S waves and possible core-related phases in the following steps.
+
+For other seismic events, the same procedure can be followed using a suitable velocity model for the planetary body being studied.
+
+```python
+from pathlib import Path
+from obspy.taup import TauPyModel
+from obspy.taup.taup_create import build_taup_model
+
+# Weber et al. (2011), Supporting Online Material, Table S2
+model_text = """
+0.0 1.0 0.5 2.6
+1.0 1.0 0.5 2.6
+1.0 3.2 1.8 2.7
+15.0 3.2 1.8 2.7
+15.0 5.5 3.2 2.8
+40.0 5.5 3.2 2.8
+mantle
+40.0 7.7 4.4 3.3
+238.0 7.7 4.4 3.3
+238.0 7.8 4.4 3.4
+488.0 7.8 4.4 3.4
+488.0 7.6 4.4 3.4
+738.0 7.6 4.4 3.4
+738.0 8.5 4.5 3.4
+1257.1 8.5 4.5 3.4
+1257.1 7.5 3.2 3.4
+1407.1 7.5 3.2 3.4
+outer-core
+1407.1 4.1 0.0 5.1
+1497.1 4.1 0.0 5.1
+inner-core
+1497.1 4.3 2.3 8.0
+1737.1 4.3 2.3 8.0
+"""
+
+work = data_dir
+model_file = work / "moon_weber2011_s2.nd"
+model_contents = model_text.strip() + "\n"
+if not model_file.exists() or model_file.read_text() != model_contents:
+    model_file.write_text(model_contents)
+
+npz_file = work / "moon_weber2011_s2.npz"
+
+if not npz_file.exists() or npz_file.stat().st_mtime < model_file.stat().st_mtime:
+    build_taup_model(
+        str(model_file),
+        output_folder=str(work)
+    )
+
+model = TauPyModel(model=str(npz_file))
+print("Lunar velocity model loaded.")
+```
+
+## 8. Predict travel times
+
+For the A1/S12 example, we use a source depth of 867 km based on Nakamura (2005, Table 2). The epicentral distance of approximately 18.15° is calculated from the published A1 source coordinates and Apollo 12 station location (Nunn et al., 2020). The velocity model is based on Weber et al. (2011, Supporting Online Material, Table S2). These parameters are specific to this example and should be updated when analysing another event.
+
+```python
+# A1 S12 example
+source_depth = 867.0
+distance = 18.15
+
+phases = [
+    "P", "p", "S", "s",
+    "PcP", "ScP", "PcS", "ScS", "PKiKP"
+]
+
+travel_times = {}
+
+for phase in phases:
+    try:
+        arrivals = model.get_travel_times(
+            source_depth_in_km=source_depth,
+            distance_in_degree=distance,
+            phase_list=[phase]
+        )
+
+        travel_times[phase] = (
+            min(a.time for a in arrivals)
+            if arrivals else None
+        )
+
+    except ValueError as error:
+        print(phase, ":", error)
+        travel_times[phase] = None
+
+for phase, value in travel_times.items():
+    if value is None:
+        print(f"{phase}: No arrival")
+    else:
+        print(f"{phase}: {value:.2f} s")
+
+# Compare possible direct P/S branches
+def first_arrival(names):
+    available = [
+        (name, travel_times[name])
+        for name in names
+        if travel_times[name] is not None
+    ]
+    return min(available, key=lambda x: x[1]) if available else (None, None)
+
+p_name, t_p = first_arrival(["P", "p"])
+s_name, t_s = first_arrival(["S", "s"])
+
+if t_p is not None and t_s is not None:
+    print(f"\nModel P branch: {p_name}")
+    print(f"Model S branch: {s_name}")
+    print(f"Predicted S-P difference: {t_s - t_p:.2f} s")
+else:
+    print("Direct P/S prediction needs further model checks.")
+```
+
+## 9. Overlay model predictions on the waveforms
+
+The travel times calculated by TauP are measured from the origin time of the moonquake, while the waveform time axis starts from the common recording start time (1973-09-30 04:06:44 UTC). Therefore, the predicted and observed times cannot be compared directly.
+
+The event time of 04:12 UTC in the original download tutorial is taken from the event catalog and should not be treated as the exact origin time of the stacked waveform. The stacked data were aligned using a reference event, and Nunn et al. (2020) also noted that some details of the original stacking and preprocessing are not fully documented.
+
+To compare the two time scales, we use a provisional observed S-wave arrival at 485 s as a reference. The model predicts an S-wave travel time of 223.74 s, giving a time offset of 261.26 s. After applying this offset, the predicted P-wave arrival is approximately 387.56 s, close to the provisional P-wave reference near 390 s.
+
+```python
+# Compare predicted and observed arrivals
+
+VIEW_S = (350.0, 820.0)
+S_REFERENCE_S = S_PICK_S
+
+if S_REFERENCE_S is None:
+    raise ValueError("Review the S pick in Step 6 first.")
+
+s_phase = s_name
+p_phase = p_name
+
+if travel_times.get(s_phase) is None:
+    raise ValueError("No model S arrival. Check Step 8.")
+
+predicted = {
+    phase: S_REFERENCE_S + tt - travel_times[s_phase]
+    for phase, tt in travel_times.items()
+    if tt is not None
+}
+
+mask = (time >= VIEW_S[0]) & (time <= VIEW_S[1])
+
+if not mask.any():
+    raise ValueError("The selected time window is outside the record.")
+
+rows = [
+    (z, OZ, "Z", "OZ",
+     [p_phase, "PcP", "PKiKP", "ScP"], P_PICK_S),
+    (r, OR, "R", "OR",
+     [s_phase, "PcS"], S_PICK_S),
+    (t, OT, "T", "OT",
+     [s_phase, "ScS"], S_PICK_S)
+]
+
+fig, axes = plt.subplots(3, 2, figsize=(13, 8), sharex=True)
+
+for i, (before, after, name1, name2, phases, observed) in enumerate(rows):
+    for j, (signal, name) in enumerate(((before, name1), (after, name2))):
+        ax = axes[i, j]
+        ax.plot(time[mask], peak_normalize(signal[mask]), lw=0.7)
+
+        for phase in phases:
+            x = predicted.get(phase)
+            if x is not None and VIEW_S[0] <= x <= VIEW_S[1]:
+                ax.axvline(x, ls="--", color="firebrick", lw=0.9)
+                ax.text(x + 2, 0.97, phase, rotation=90,
+                        va="top", fontsize=8, color="firebrick",
+                        transform=ax.get_xaxis_transform())
+
+        if observed is not None and VIEW_S[0] <= observed <= VIEW_S[1]:
+            ax.axvline(observed, ls=":", color="black", lw=1.1)
+
+        ax.set(title=name, ylabel="Normalized amplitude", xlim=VIEW_S)
+        ax.grid(alpha=0.2)
+
+for ax in axes[-1]:
+    ax.set_xlabel("Time from common start (s)")
+
+fig.suptitle(
+    "A1/S12: predicted vs. observed arrivals\n"
+    "Red dashed = model; black dotted = tentative P/S picks",
+    y=1.02
+)
+
+fig.tight_layout()
+fig.savefig(
+    FIGURE_DIR / "predicted_phase_comparison.png",
+    dpi=180, bbox_inches="tight"
+)
+plt.show()
+
+print("Model-predicted arrivals (seconds from common start):")
+for phase in (p_phase, s_phase, "PcP", "PKiKP", "ScP", "PcS", "ScS"):
+    if phase in predicted:
+        print(f"{phase:6s} {predicted[phase]:8.2f}")
+```
+
+![TauP predictions overlaid on bandpassed and polarization-filtered waveforms](/media/lunar_phase/predicted_phase_comparison.png)
+
+## Interpreting the Results
+
+In this example, the model predicts p and s travel times of 126.30 s and 223.74 s, respectively. Using a provisional observed S-wave arrival at 485 s, the predicted P-wave arrival is approximately 387.56 s, which is close to the tentative P-wave pick at 390 s.
+
+The figure compares the bandpassed Z, R and T waveforms with their polarization-filtered versions, OZ, OR and OT. The red dashed lines represent the model-predicted arrivals, while the black dotted lines indicate the tentative P- and S-wave picks. Each waveform is normalized separately to make the signals easier to examine, so the amplitudes should not be compared directly between panels.
+
+From the results, the predicted S-wave arrival is relatively clear on T/OT, while the P-wave signal is less noticeable on OZ than on the original Z component. This may be related to the nonlinear nature of polarization filtering, which does not necessarily enhance every seismic arrival. Some later wave packets are also visible, but they do not consistently match all the predicted core-related phases.
+
+These results show that polarization filtering and theoretical travel-time predictions can help us locate possible seismic arrivals, but a predicted arrival does not necessarily mean that the phase is observed. The late signals may also be affected by scattering and the long lunar seismic coda. Therefore, further comparisons across stations or moonquake clusters would be needed to support the identification of individual core reflections (Weber et al., 2011; Nunn et al., 2020).
+
+## General Application
+
+Although this tutorial uses the A1 deep moonquake recorded at Apollo Station 12, the same polarization filtering method can be applied to other three-component seismic datasets.
+
+For a different event, users need to prepare three time-aligned waveforms and check their component orientations. The horizontal components should be rotated into radial and transverse directions using the appropriate source and station locations. The frequency band and filtering window may also need adjustment depending on the seismic data.
+
+The theoretical travel-time analysis can be repeated by changing the source depth, epicentral distance and velocity model. The predicted arrivals should then be compared with the observed waveforms using a suitable reference arrival time.
+
+This method can help highlight seismic signals and narrow down possible arrival windows. However, not all phases will become clearer after filtering, and a predicted arrival alone does not confirm a seismic phase.
+
+## Limitations
+The lunar interior is still not fully understood, and different studies have proposed different velocity structures and core sizes. In this tutorial, we use the model from Weber et al. (2011) as a reference rather than assuming it represents the exact structure of the Moon.
+
+More recent research, such as Briaud et al. (2023), also supports the presence of a solid inner core, although its size and properties remain uncertain. Therefore, the theoretical arrival times calculated in this tutorial are model-dependent predictions, not exact arrival times. They provide a reference for examining the observed waveforms and evaluating whether the signals could be consistent with possible seismic phases.
+
+## Sources
+
+- [Nunn et al. (2020) lunar seismology data](https://doi.org/10.5281/zenodo.7787610)
+- Nakamura, Y. (2005). Farside deep moonquakes and deep interior of the Moon. Journal of Geophysical Research Atmospheres, 110(E1). https://doi.org/10.1029/2004je002332
+- Weber, R. C., Lin, P., Garnero, E. J., Williams, Q., & Lognonné, P. (2011). Seismic detection of the lunar core. Science, 331(6015), 309–312. https://doi.org/10.1126/science.1199375
+- Yuan, Y., Garnero, E. J., Zhu, P., Lin, P., Weber, R. C., & Wang, F. (2021). New methods for data stacking and p‐ and s‐wave arrival time determination using the Deep Moonquake Apollo recordings. Journal of Geophysical Research Planets, 126(2). https://doi.org/10.1029/2020je006424
+- Briaud et al. (2023). The lunar solid inner core and the mantle overturn. https://doi.org/10.1038/s41586-023-05935-7

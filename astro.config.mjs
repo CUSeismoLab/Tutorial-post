@@ -43,6 +43,7 @@ export default defineConfig({
           { label: 'STA/LTA earthquake detection', slug: 'sta_lta' },
           { label: 'Absolute earthquake location', slug: 'abs_loc' },
           { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
+          { label: 'Lunar seismic phase picking', slug: 'lunar-phase' },
         ] },
         { label: 'Advanced level', items: [
           { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
