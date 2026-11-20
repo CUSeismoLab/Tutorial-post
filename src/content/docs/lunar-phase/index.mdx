@@ -3,11 +3,11 @@ title: "Lunar seismic phase picking"
 slug: lunar-phase
 ---
 
-This tutorial builds on [Apollo lunar seismic data](/lunar-seismic/). Please complete that section before starting this tutorial.
-
 Kwun Hei Fong & Qili Andy Dai
 
 Contact: qilidai@cuhk.edu.hk
+
+This tutorial builds on [Apollo lunar seismic data](/lunar-seismic/). Please complete that section before starting this tutorial.
 
 This tutorial uses the three-component A1 deep moonquake stack recorded at Apollo 12 and distributed by Nunn et al. (2020). We compare the direct P and S arrivals before and after polarization filtering, then use TauP and the lunar velocity model of Weber et al. (2011) to predict later arrivals. We align the predictions to a tentative S arrival and overlay them on the waveforms to show where to look for possible deep phases.
 
@@ -15,7 +15,7 @@ This tutorial uses the three-component A1 deep moonquake stack recorded at Apoll
 
 ## 1. Set up the environment
 
-Select your Python kernel (for example, `fk`). If imports fail, run `%pip install "obspy>=1.4.2" numpy scipy matplotlib` in a separate cell and restart the kernel. The notebook uses relative paths and saves figures in `phase_picking_figures/`.
+The notebook uses relative paths and saves figures in `phase_picking_figures/`.
 
 ```python
 import sys

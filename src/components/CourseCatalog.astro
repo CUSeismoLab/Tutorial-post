@@ -11,14 +11,10 @@ const levels = [
     ],
   },
   {
-    number: '02', title: 'Find the earthquakes', level: 'Intermediate level',
-    description: 'Turn seismic records into detections and locate earthquake hypocenters.',
-    courses: [['sta_lta', 'STA/LTA earthquake detection'], ['abs_loc', 'Absolute earthquake location'], ['lunar-seismic', 'Apollo lunar seismic data']],
-  },
-  {
-    number: '03', title: 'Explore the physics', level: 'Advanced level',
-    description: 'Investigate earthquake sources, simulate fault rupture, and image Earth’s interior.',
+    number: '02', title: 'Explore the physics', level: 'Advanced level',
+    description: 'Detect and locate earthquakes, investigate their sources, and image Earth’s interior.',
     courses: [
+      ['sta_lta', 'STA/LTA earthquake detection'], ['abs_loc', 'Absolute earthquake location'],
       ['gcap', 'Focal mechanisms with gCAP'], ['fk', 'FK & CAP installation'], ['eqt', 'Earthquake Transformer'],
       ['dd_loc', 'Double-difference relocation'], ['source_spectra', 'Spectral analysis'],
       ['pylith_static', 'Static stress change with PyLith'], ['pylith_dynamic', 'Dynamic rupture simulation'],
@@ -26,13 +22,18 @@ const levels = [
       ['ambient_tomo', 'Ambient noise cross correlation'],
     ],
   },
+  {
+    number: '03', title: 'Explore the Space', level: 'Planetary Science',
+    description: 'Work with Apollo seismic records and use predicted arrivals to examine deep lunar phases.',
+    courses: [['lunar-seismic', 'Apollo lunar seismic data'], ['lunar-phase', 'Lunar seismic phase picking']],
+  },
 ];
 ---
 
 <div class="course-home not-content">
   <div class="course-summary" aria-label="Course overview">
-    <span><strong>18</strong> practical modules</span>
-    <span><strong>3</strong> learning levels</span>
+    <span><strong>{levels.reduce((total, { courses }) => total + courses.length, 0)}</strong> practical modules</span>
+    <span><strong>{levels.length}</strong> course categories</span>
   </div>
 
   <section id="learning-path" aria-labelledby="path-title">

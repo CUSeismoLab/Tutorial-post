@@ -39,13 +39,9 @@ export default defineConfig({
           { label: 'ObsPy: Request data', slug: 'obspy-1' },
           { label: 'ObsPy: Process data', slug: 'obspy-2' },
         ] },
-        { label: 'Intermediate level', items: [
+        { label: 'Advanced level', items: [
           { label: 'STA/LTA earthquake detection', slug: 'sta_lta' },
           { label: 'Absolute earthquake location', slug: 'abs_loc' },
-          { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
-          { label: 'Lunar seismic phase picking', slug: 'lunar-phase' },
-        ] },
-        { label: 'Advanced level', items: [
           { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
           { label: 'FK & CAP installation', slug: 'fk' },
           { label: 'Earthquake Transformer', slug: 'eqt' },
@@ -56,6 +52,10 @@ export default defineConfig({
           { label: 'Body wave tomography', slug: 'body_tomo' },
           { label: 'Surface wave tomography', slug: 'surface_tomo' },
           { label: 'Ambient noise cross correlation', slug: 'ambient_tomo' },
+        ] },
+        { label: 'Planetary Science', items: [
+          { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
+          { label: 'Lunar seismic phase picking', slug: 'lunar-phase' },
         ] },
         { label: 'Resources', items: [
           { label: 'Acknowledgement', slug: 'appendix' },
