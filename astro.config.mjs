@@ -56,6 +56,7 @@ export default defineConfig({
         { label: 'Explore the Space', items: [
           { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
           { label: 'Lunar seismic phase picking', slug: 'lunar-phase' },
+          { label: 'Martian topography', slug: 'mars-topography' },
         ] },
         { label: 'Resources', items: [
           { label: 'Acknowledgement', slug: 'appendix' },
