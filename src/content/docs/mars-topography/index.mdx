@@ -371,7 +371,7 @@ Most of the mapped plain has slopes below 5%. Steeper ground is concentrated tow
 
 ## 5. Download the InSight marsquake catalogue
 
-Download the extended QuakeML file from the Marsquake Service V14 release. The parser selects the 1,323 S-series marsquakes for analysis.
+Download the extended QuakeML file from the Marsquake Service V14 release. The parser selects the 1,323 marsquakes for analysis.
 
 ```python
 MQS_URL = ('https://pds-geosciences.wustl.edu/insight/'
@@ -471,7 +471,7 @@ print('types  ', {k: types[k] for k in sorted(types, key=types.get, reverse=True
 print('quality', {k: quals[k] for k in sorted(quals, key=lambda s: str(s))})
 ```
 
-The S-series classes are LF (low frequency), BB (broadband), HF (high frequency), 2.4 (2.4 Hz resonance) and VF (very high frequency). The A–D quality grades describe confidence in the event and its phase information.
+The marsquake classes are LF (low frequency), BB (broadband), HF (high frequency), 2.4 (2.4 Hz resonance) and VF (very high frequency). The A–D quality grades describe confidence in the event and its phase information.
 
 ## 6. Explore event counts and distances
 
