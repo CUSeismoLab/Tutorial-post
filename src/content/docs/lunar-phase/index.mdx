@@ -446,19 +446,15 @@ for phase in (p_phase, s_phase, "PcP", "PKiKP", "ScP", "PcS", "ScS"):
 
 ![TauP predictions overlaid on bandpassed and polarization-filtered waveforms](/media/lunar_phase/predicted_phase_comparison.png)
 
-## Interpreting the Results
-
-In this example, the model predicts p and s travel times of 126.30 s and 223.74 s, respectively. Using a provisional observed S-wave arrival at 485 s, the predicted P-wave arrival is approximately 387.56 s, which is close to the tentative P-wave pick at 390 s.
-
 The figure compares the bandpassed Z, R and T waveforms with their polarization-filtered versions, OZ, OR and OT. The red dashed lines represent the model-predicted arrivals, while the black dotted lines indicate the tentative P- and S-wave picks. Each waveform is normalized separately to make the signals easier to examine, so the amplitudes should not be compared directly between panels.
 
-From the results, the predicted S-wave arrival is relatively clear on T/OT, while the P-wave signal is less noticeable on OZ than on the original Z component. This may be related to the nonlinear nature of polarization filtering, which does not necessarily enhance every seismic arrival. Some later wave packets are also visible, but they do not consistently match all the predicted core-related phases.
+The predicted S-wave arrival is relatively clear on T/OT, while the P-wave signal is less noticeable on OZ than on the original Z component. This may be related to the nonlinear nature of polarization filtering, which does not necessarily enhance every seismic arrival. Some later wave packets are also visible, but they do not consistently match all the predicted core-related phases.
 
 These results show that polarization filtering and theoretical travel-time predictions can help us locate possible seismic arrivals, but a predicted arrival does not necessarily mean that the phase is observed. The late signals may also be affected by scattering and the long lunar seismic coda. Therefore, further comparisons across stations or moonquake clusters would be needed to support the identification of individual core reflections (Weber et al., 2011; Nunn et al., 2020).
 
 ## General Application
 
-Although this tutorial uses the A1 deep moonquake recorded at Apollo Station 12, the same polarization filtering method can be applied to other three-component seismic datasets.
+Although this tutorial uses the A1 deep moonquake recorded at Apollo Station 12, the same polarization filtering method can be applied to other seismic datasets.
 
 For a different event, users need to prepare three time-aligned waveforms and check their component orientations. The horizontal components should be rotated into radial and transverse directions using the appropriate source and station locations. The frequency band and filtering window may also need adjustment depending on the seismic data.
 
