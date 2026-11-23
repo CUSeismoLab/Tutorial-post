@@ -3,14 +3,16 @@ title: "Martian topography"
 slug: mars-topography
 ---
 
-Wong Shun Lok & Qili Andy Dai
+Shun Lok Wong & Qili Andy Dai
 
 Aerospace Science and Earth Informatics Double Major Program  
 Department of Earth and Environmental Sciences  
 
 Contact: qilidai@cuhk.edu.hk
 
-Use Mars Orbiter Laser Altimeter (MOLA) elevations to map Mars and examine the InSight landing site. Then explore the InSight marsquake catalogue, inspect a fresh impact crater in orbital imagery, and compare crater diameters with seismic magnitudes for eight confirmed impacts.
+How can we connect a seismic signal recorded on Mars to an impact crater seen from orbit? This tutorial brings together three datasets that capture different aspects of the same problem. Mars Orbiter Laser Altimeter (MOLA) elevations show the regional terrain around the InSight landing site and let us measure large craters such as Jezero. HiRISE imagery reveals fresh craters too small to resolve in the MOLA grid, and the InSight catalogue records the seismic signals associated with confirmed impacts.
+
+By working through these datasets, you will see how spatial resolution determines what can be measured, how orbital images help confirm an impact, and what eight confirmed events can tell us about the relationship between crater diameter and seismic magnitude.
 
 [Download the Jupyter notebook](/media/mars_topography/mars_topography_and_marsquakes.ipynb).
 
@@ -134,7 +136,7 @@ fetch(MOLA_URL, MOLA, min_bytes=1_900_000_000)
 print(f'file size: {MOLA.stat().st_size / 1e9:.2f} GB')
 ```
 
-Check the raster dimensions, data type and pixel spacing before using the grid.
+Open the GeoTIFF and check its dimensions, data type and pixel spacing. These checks help confirm you have the expected MOLA product before you start plotting.
 
 ```python
 with rasterio.open(MOLA) as src:
@@ -150,7 +152,7 @@ with rasterio.open(MOLA) as src:
     assert abs(src.res[0] - 463.09) < 0.5
 ```
 
-The projection uses a spherical Mars radius of 3,396,190 m. At the equator, the 463.09 m pixel spacing corresponds to 128 pixels per degree. Convert latitude and longitude to projected coordinates before reading raster windows. The round-trip check below should return the original InSight coordinates.
+The projection uses a spherical Mars radius of 3,396,190 m. At the equator, the 463.09 m pixel spacing corresponds to 128 pixels per degree. The raster uses metres, so convert the InSight longitude and latitude to projected coordinates before selecting a window. Convert back to degrees to check that the transformation returns the original location.
 
 ```python
 R_MARS = 3396190.0          # sphere radius in the CRS definition, metres
@@ -173,7 +175,7 @@ print('round trip:', tuple(round(v, 4) for v in xy_to_lonlat(x_site, y_site)))
 
 ## 3. Plot the global relief
 
-Average the grid into a 5,760 × 2,880 array for the global map. This gives about 3.7 km spacing at the equator and uses less memory than loading the full-resolution raster into a plotting array. A northwest light at 45° and a vertical exaggeration of 1.5 highlight the relief in the hillshade.
+For a global view, average the MOLA grid down to 5,760 × 2,880 cells. At about 3.7 km spacing near the equator, the smaller grid retains major landforms and is easier to plot. Apply hillshade with northwest illumination at a 45° elevation angle and a vertical exaggeration of 1.5 to make the relief easier to see.
 
 ```python
 with rasterio.open(MOLA) as src:
@@ -250,7 +252,7 @@ The global grid places the minimum elevation in Hellas near −8 km and the maxi
 
 ## 4. Examine the InSight landing site
 
-Read a 12° by 16° window around InSight at the native grid spacing. Plot the elevation, a north–south profile and the slope. To estimate slope, scale the east–west spacing by the cosine of the landing-site latitude. This correction is about 0.3% at 4.5°N.
+Zoom in on InSight with a window spanning 12° of latitude and 16° of longitude at MOLA’s native resolution. Compare the elevation map, the north–south profile and the slope map to see how the terrain changes around the landing site. To estimate slope, scale the east–west spacing by the cosine of the landing-site latitude. This correction is about 0.3% at 4.5°N.
 
 ```python
 def read_box(path, lat_min, lat_max, lon_min, lon_max):
@@ -369,9 +371,7 @@ Most of the mapped plain has slopes below 5%. Steeper ground is concentrated tow
 
 ## 5. Download the InSight marsquake catalogue
 
-Use the extended QuakeML file from the Marsquake Service V14 release. It contains 2,715 records, including 1,323 S-series marsquakes and 1,392 T-series super-high-frequency detections. Count the series separately when comparing the file with the published catalogue totals.
-
-The event latitude and longitude fields are empty in this file. Epicentral distance is available for 672 records.
+Download the extended QuakeML file from the Marsquake Service V14 release. The parser selects the 1,323 S-series marsquakes for analysis.
 
 ```python
 MQS_URL = ('https://pds-geosciences.wustl.edu/insight/'
@@ -383,15 +383,14 @@ fetch(MQS_URL, MQS, min_bytes=30_000_000)
 print(f'file size: {MQS.stat().st_size / 1e6:.1f} MB')
 ```
 
-Read the event type from the event element and location quality and distance from its preferred origin. Use `preferredOriginID` to select the origin when multiple solutions are available.
+A QuakeML event can contain several origin solutions. Read the event type from the event record, then use `preferredOriginID` to select the origin from which to extract location quality and epicentral distance.
 
 ```python
 BED = '{http://quakeml.org/xmlns/bed/1.2}'
 MARS = '{http://quakeml.org/xmlns/bed/1.2/mars}'
 
 TYPE_MAP = {'LOW_FREQUENCY': 'LF', 'BROADBAND': 'BB', 'HIGH_FREQUENCY': 'HF',
-            '2.4_HZ': '2.4', 'VERY_HIGH_FREQUENCY': 'VF',
-            'SUPER_HIGH_FREQUENCY': 'SF'}
+            '2.4_HZ': '2.4', 'VERY_HIGH_FREQUENCY': 'VF'}
 
 
 def text_of(node, path):
@@ -426,6 +425,8 @@ def parse_catalogue(path):
         for desc in ev.findall(BED + 'description'):
             if text_of(desc, BED + 'type') == 'earthquake name':
                 name = text_of(desc, BED + 'text')
+        if not name or not name.startswith('S'):
+            continue
         origin = preferred_origin(ev)
         lat_raw = text_of(origin, BED + 'latitude')
         lon_raw = text_of(origin, BED + 'longitude')
@@ -456,14 +457,8 @@ def parse_catalogue(path):
 
 ```python
 events = parse_catalogue(MQS)
-print('records parsed:', len(events))
-assert len(events) == 2715
-
-series = {}
-for e in events:
-    series[e['name'][0]] = series.get(e['name'][0], 0) + 1
-print('S series (marsquakes):', series.get('S', 0))
-print('T series (SF class)  :', series.get('T', 0))
+print('S-series marsquakes:', len(events))
+assert len(events) == 1323
 
 print('with coordinates:', sum(1 for e in events if np.isfinite(e['lat'])))
 print('with distance   :', sum(1 for e in events if np.isfinite(e['distance_deg'])))
@@ -474,38 +469,26 @@ for e in events:
     quals[e['quality']] = quals.get(e['quality'], 0) + 1
 print('types  ', {k: types[k] for k in sorted(types, key=types.get, reverse=True)})
 print('quality', {k: quals[k] for k in sorted(quals, key=lambda s: str(s))})
-
-cross = {}
-for e in events:
-    key = (e['name'][0], e['event_type'])
-    cross[key] = cross.get(key, 0) + 1
-print('prefix x type:', dict(sorted(cross.items())))
 ```
 
-Check that the catalogue contains 1,323 S records and 1,392 T records. The S-series types include LF (low frequency), BB (broadband), HF (high frequency), 2.4 (2.4 Hz resonance) and VF (very high frequency). The T records are classified as SF (super high frequency).
-
-The A–D quality grades describe the confidence in the event and its phase information. The file contains 14 A, 175 B, 826 C and 1,700 D records.
+The S-series classes are LF (low frequency), BB (broadband), HF (high frequency), 2.4 (2.4 Hz resonance) and VF (very high frequency). The A–D quality grades describe confidence in the event and its phase information.
 
 ## 6. Explore event counts and distances
 
-Plot event counts by Martian sol and compare distances from InSight for events with a distance estimate. In an event name such as S1415a, the digits identify the sol and the final letter distinguishes events on the same sol.
+Plot detections by Martian sol to see how the catalogue accumulated over the mission. Then look at the distance distribution for records with an epicentral distance estimate. In an event name such as S1415a, the digits identify the sol and the final letter distinguishes events on the same sol.
 
 ```python
 sols = np.array([e['sol'] for e in events], dtype=float)
-is_s = np.array([e['name'].startswith('S') for e in events])
 
 fig, axes = plt.subplots(1, 2, figsize=(12.4, 5.4), gridspec_kw={'width_ratios': [2.1, 1]})
 
 ax = axes[0]
 bins = np.arange(0, 1480, 25)
-ax.hist(sols[is_s], bins=bins, histtype='stepfilled', color='#1f4e79', alpha=0.55,
-        edgecolor='#1f4e79', lw=1.0, label=f'S series, {int(is_s.sum()):,} marsquakes')
-ax.hist(sols[~is_s], bins=bins, histtype='step', color='#b06a00', lw=1.1,
-        label=f'T series, {int((~is_s).sum()):,} SF detections')
+ax.hist(sols, bins=bins, histtype='stepfilled', color='#1f4e79', alpha=0.55,
+        edgecolor='#1f4e79', lw=1.0, label=f'S series, {len(events):,} marsquakes')
 ax.set_xlabel('sol since landing')
 ax.set_ylabel('events per 25 sols')
 ax.set_xlim(0, 1460)
-ax.legend(loc='upper right', frameon=False)
 ax.set_title('(a) detections through the mission')
 
 ax = axes[1]
@@ -529,7 +512,7 @@ plt.show()
 
 ![InSight detections by sol and event type](/media/mars_topography/fig03_catalogue_counts.png)
 
-*Figure 3. InSight detections by mission sol in 25-sol bins and by catalogue event type.*
+*Figure 3. Distribution of the 1,323 marsquakes in the InSight V14 catalogue. (a) Event counts in 25-sol bins since landing. (b) Total event counts by catalogue class.*
 
 Detection varies with wind noise, time of day and season. Interpret gaps and peaks in the histogram in light of those changes in detectability.
 
@@ -606,7 +589,7 @@ plt.show()
 
 *Figure 4. Distances from InSight for the 672 catalogue records with distance estimates. The lower panel focuses on distances below 8°. The eight impact distances are from Daubar et al. (2024, Table 1).*
 
-Most reported distances fall between 15° and 40°. The distribution describes the subset with distance estimates and is influenced by detection and location thresholds. Distance alone locates an event on a circle around InSight. Only 94 records also report a backazimuth.
+Most reported distances fall between 15° and 40°. The distribution describes the subset with distance estimates and is influenced by detection and location thresholds. Distance alone locates an event on a circle around InSight.
 
 ## 7. Examine fresh impact craters
 
@@ -671,9 +654,9 @@ plt.show()
 
 ![HiRISE image of the fresh crater associated with S1094b](/media/mars_topography/fig05_s1094b.png)
 
-*Figure 5. HiRISE browse image of the fresh crater associated with S1094b, cropped from ESP_073077_2155 (RED). Image credit: NASA/JPL-Caltech/University of Arizona.*
+*Figure 5. HiRISE browse image of the fresh crater associated with S1094b.*
 
-Use the HiRISE browse image to identify the rim and ejecta. The published diameter and depth come from higher-resolution measurements.
+In the HiRISE browse image, look for the crater rim and the ejecta around it. Use the published higher-resolution measurements for the crater’s diameter and depth.
 
 For Jezero, average elevation in concentric rings about the crater centre. Estimate the rim radius from the maximum of this radial profile outside the central 8 km, then double the radius to estimate the diameter.
 
@@ -739,7 +722,7 @@ plt.show()
 
 *Figure 6. Mean elevation around Jezero crater in 1 km radial bins. The marker shows the selected rim radius. The published 45 km diameter is shown for comparison.*
 
-The profile gives a radius of 25.5 km and a diameter of 51 km, about 13% larger than the published 45 km diameter. The result depends on the crater centre, rim definition and interior topography. Inspect the profile and map together before interpreting a radial maximum as the rim.
+The profile gives a radius of 25.5 km and a diameter of 51 km, about 13% larger than the published 45 km diameter. The estimate depends on the chosen crater centre, how the rim is defined and the topography inside the crater. Use the map to check whether the radial peak follows the rim.
 
 ## 8. Compare crater diameter and seismic magnitude
 
@@ -833,9 +816,9 @@ rho_vf, p_vf = spearmanr(diam, mag - 0.5 * np.array([r[3] == 'VF' for r in rows]
 print(f'all eight : rho = {rho_vf:+.2f}, p = {p_vf:.2f}')
 ```
 
-The Spearman correlation is about 0.86 for all eight events and 0.71 for the six local events. With six local events and a p-value above 0.1, the local subset offers limited evidence for a diameter–magnitude trend.
+The Spearman rank correlation is about 0.86 across all eight events and 0.71 for the six local events. The change shows how much the result depends on which events are included. With only six local events and a p-value of about 0.11, evidence for a diameter–magnitude trend in the local subset is limited.
 
-Crater diameter depends on impact energy and target properties. The seismic magnitude estimate also depends on the source, propagation path and magnitude scale. Use the plot to explore those effects and the influence of the two distant events.
+Crater diameter depends on impact energy and target properties. The seismic magnitude estimate also depends on the source, propagation path and magnitude scale. Compare the two distant impacts with the local group to see how they affect the pattern.
 
 ## Sources
 
