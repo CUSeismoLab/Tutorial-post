@@ -3,7 +3,7 @@ import { withBase } from '../lib/paths';
 
 const levels = [
   {
-    number: '01', title: 'Build your toolkit', level: 'Entry level',
+    number: '01', title: 'Build Your Toolkit', level: 'Entry level',
     description: 'Get comfortable with the command line, make maps, and work with seismic waveforms.',
     courses: [
       ['unix', 'Unix commands'], ['gmt6-1', 'GMT · Topographic maps'], ['gmt6-2', 'GMT · Seismic data'],
@@ -11,28 +11,29 @@ const levels = [
     ],
   },
   {
-    number: '02', title: 'Find the earthquakes', level: 'Intermediate level',
-    description: 'Turn seismic records into detections and locate earthquake hypocenters.',
-    courses: [['sta_lta', 'STA/LTA earthquake detection'], ['abs_loc', 'Absolute earthquake location'], ['lunar-seismic', 'Apollo lunar seismic data']],
-  },
-  {
-    number: '03', title: 'Explore the physics', level: 'Advanced level',
-    description: 'Investigate earthquake sources, simulate fault rupture, and image Earth’s interior.',
+    number: '02', title: 'Explore the Earth', level: 'Earth seismology',
+    description: 'Detect and locate earthquakes, investigate their sources, and image Earth’s interior.',
     courses: [
-      ['gcap', 'Focal mechanisms with gCAP'], ['fk', 'FK & CAP installation'], ['eqt', 'Earthquake Transformer'],
+      ['sta_lta', 'STA/LTA earthquake detection'], ['abs_loc', 'Absolute earthquake location'],
+      ['fk', 'FK & CAP installation'], ['gcap', 'Focal mechanisms with gCAP'], ['eqt', 'Earthquake Transformer'],
       ['dd_loc', 'Double-difference relocation'], ['source_spectra', 'Spectral analysis'],
       ['pylith_static', 'Static stress change with PyLith'], ['pylith_dynamic', 'Dynamic rupture simulation'],
       ['body_tomo', 'Body wave tomography'], ['surface_tomo', 'Surface wave tomography'],
       ['ambient_tomo', 'Ambient noise cross correlation'],
     ],
   },
+  {
+    number: '03', title: 'Explore the Space', level: 'Planetary Science',
+    description: 'Explore Apollo seismic records, Martian topography, and InSight marsquakes.',
+    courses: [['lunar-seismic', 'Apollo lunar seismic data'], ['lunar-phase', 'Lunar seismic phase picking'], ['mars-topography', 'Martian topography'], ['insight-seismic', 'InSight Mars seismic data']],
+  },
 ];
 ---
 
 <div class="course-home not-content">
   <div class="course-summary" aria-label="Course overview">
-    <span><strong>18</strong> practical modules</span>
-    <span><strong>3</strong> learning levels</span>
+    <span><strong>{levels.reduce((total, { courses }) => total + courses.length, 0)}</strong> practical modules</span>
+    <span><strong>{levels.length}</strong> course categories</span>
   </div>
 
   <section id="learning-path" aria-labelledby="path-title">

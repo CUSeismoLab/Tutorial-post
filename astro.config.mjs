@@ -32,21 +32,18 @@ export default defineConfig({
         { label: 'Start here', items: [
           { label: 'Introduction', slug: 'intro' },
         ] },
-        { label: 'Entry level', items: [
+        { label: 'Build Your Toolkit', items: [
           { label: 'Unix commands', slug: 'unix' },
           { label: 'GMT: Topographic maps', slug: 'gmt6-1' },
           { label: 'GMT: Seismic data', slug: 'gmt6-2' },
           { label: 'ObsPy: Request data', slug: 'obspy-1' },
           { label: 'ObsPy: Process data', slug: 'obspy-2' },
         ] },
-        { label: 'Intermediate level', items: [
+        { label: 'Explore the Earth', items: [
           { label: 'STA/LTA earthquake detection', slug: 'sta_lta' },
           { label: 'Absolute earthquake location', slug: 'abs_loc' },
-          { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
-        ] },
-        { label: 'Advanced level', items: [
-          { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
           { label: 'FK & CAP installation', slug: 'fk' },
+          { label: 'Focal mechanisms with gCAP', slug: 'gcap' },
           { label: 'Earthquake Transformer', slug: 'eqt' },
           { label: 'Double-difference relocation', slug: 'dd_loc' },
           { label: 'Spectral analysis', slug: 'source_spectra' },
@@ -55,6 +52,12 @@ export default defineConfig({
           { label: 'Body wave tomography', slug: 'body_tomo' },
           { label: 'Surface wave tomography', slug: 'surface_tomo' },
           { label: 'Ambient noise cross correlation', slug: 'ambient_tomo' },
+        ] },
+        { label: 'Explore the Space', items: [
+          { label: 'Apollo lunar seismic data', slug: 'lunar-seismic' },
+          { label: 'Lunar seismic phase picking', slug: 'lunar-phase' },
+          { label: 'Martian topography', slug: 'mars-topography' },
+          { label: 'InSight Mars seismic data', slug: 'insight-seismic' },
         ] },
         { label: 'Resources', items: [
           { label: 'Acknowledgement', slug: 'appendix' },
